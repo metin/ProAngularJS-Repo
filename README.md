@@ -15,3 +15,5 @@ Examples and Concepts from ProAngularJS book
     . two-way databinding
     . directives: ng-hide, ng-class, ng-submit, ng-repeat
     . form validation
+
+002-todo-app-http-service: This is version 2 of 001-todo-app. The only addition is the utilization of the $http service to retrieve the task information from a json file.
