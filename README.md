@@ -17,3 +17,5 @@ Examples and Concepts from ProAngularJS book
     . form validation
 
 002-todo-app-http-service: This is version 2 of 001-todo-app. The only addition is the utilization of the $http service to retrieve the task information from a json file.
+
+003-todo-app-final: This is the final version of 001-todo-app in which there is no additions but the contents are refactored to create neater code.

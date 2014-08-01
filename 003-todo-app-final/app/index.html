@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="/bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="/app.js"></script>
+    <script type="text/javascript" src="/header.js"></script>
+    <script type="text/javascript" src="/newTaskForm.js"></script>
+</head>
+<body ng-controller="ToDoController as toDoCtrl">
+    <div class="well well-lg">
+        <tasks-header></tasks-header>
+        <new-task-form></new-task-form>
+        <div class="panel">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Done</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in toDoCtrl.toDoInfo.items | filterByCheckedStatus:toDoCtrl.showCompleted | orderBy:'action'">
+                        <td>{{item.action}}</td>
+                        <td><input type="checkbox" ng-model="item.done"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="toDoCtrl.showCompleted"/>Show completed tasks</label>
+            </label>
+        </div>
+    </div>
+</body>
+</html>

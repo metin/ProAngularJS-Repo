@@ -1,0 +1,10 @@
+<div class="well">
+    <form name="taskForm" ng-submit="taskForm.$valid" novalidate> 
+        <div class="input-group">
+            <input class="form-control" placeholder="Type a new task" ng-model="toDoCtrl.task.actionText" required/>
+            <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="toDoCtrl.addNewItem(toDoCtrl.task.actionText)" ng-class="{disabled: !taskForm.$valid}">Add</button>
+            </span>
+        </div>
+    </form>
+</div>
