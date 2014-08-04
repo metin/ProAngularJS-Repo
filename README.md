@@ -72,6 +72,12 @@ Example (chaining:)
 
 The first time then() is used to handle the request response from $http.get(). The second one is used to perform additional actions, but only when the other has completed.
 
+## JSON
+The JavaScript Object Notation has become the de facto standard data format for web apps. JSON is easy to work with but you can still get into trouble because JSON libraries encode and decode JSON slightly different - a problem that can manifest if the client and server side of your application are developed using different programming languages.
+
+Angular makes working with JSON simple:
+    . When you request JSON via AJAX, the response will be parsed automatically into JavaScript objects and passed to the success function.
+    . Additionally, angular provides angular.toJson and angular.fromJson to explicitly encode and decode JSON data.
 
 # Examples
 
@@ -92,3 +98,14 @@ The first time then() is used to handle the request response from $http.get(). T
 004-bootstrap-grids: An example of different types of Bootstrap grids.
 
 005-javascript-angular-basics: An example of some of the Angular utility methods that complement JavaScript, such as angular.forEach, angular.extend, etc. All the functionality is embedded inside the app.run method.
+
+006-angular-promises-basics: Illustrates how to work with Promise objects and angular. The application performs a simple Ajax request to retrieve a JSON file and uses promises to handle success and error responses.
+
+007-sports-store: Implementation of the SportsStore application with the functionalities described on Chapter 6:
+    . Data is defined statically in the app-controller.js
+    . Product Catalog can be filtered by Category
+    . Pagination available, 3 products per page
+
+Additionally, several functional enhancements have been performed:
+    . the $scope service is not used, data is defined as a property of the controller
+    . files are organized according to AngularJS' best practices
