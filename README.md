@@ -51,6 +51,27 @@ Example syntax is:
         ...
     }); 
 
+The $http.get method returns a promise object that you can use to register a callback function that will be invoked when the request has been completed.
+
+Then methods defined by a Promise object are:
+    . error(callback) : specifies a callback function that will be invoked if the Promise cannot be completed.
+    . success(callback) : specifies a callback function that will be invoked when the work represented by the Promise is completed.
+    . then(success, err): specifies callbacks that will be invoked if the Promise succeeds or fails.
+
+In the case of $http operations, the success callback is passed the data retrieved from the server and the error callback is passed the details about the problem that was encountered.
+
+The three methods return other Promise objects, allowing asyn tasks to be chained together in sequence.
+Example (chaining:)
+        $http.get('todo.json').then(function (response) { 
+            $scope.todos = response.data;
+        }, function () {
+            $scope.todos.push({action: 'error encountered while reading data from the server'});
+        }).then(function() {
+            $scope.todos.push({action: 'Request complete', done: true});
+        });
+
+The first time then() is used to handle the request response from $http.get(). The second one is used to perform additional actions, but only when the other has completed.
+
 
 # Examples
 

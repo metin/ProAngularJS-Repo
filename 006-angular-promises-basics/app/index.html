@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="promisesPrimer">
+<head>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="/bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="/app.js"></script>
+</head>
+<body ng-controller="DemoController as demoCtrl">
+    <h1>ToDos</h1>
+    <table class="table">
+        <tr ng-repeat="item in todos">
+            <td>{{item.action}}</td>
+            <td>{{item.done}}</td>
+        </tr>
+    </table>
+</body>
+</html>
