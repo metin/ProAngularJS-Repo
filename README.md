@@ -109,3 +109,11 @@ Angular makes working with JSON simple:
 Additionally, several functional enhancements have been performed:
     . the $scope service is not used, data is defined as a property of the controller
     . files are organized according to AngularJS' best practices
+
+008-sports-store: Implementation of the SportsStore application with the functionalities described on Chapter 7:
+Note that some of the pieces have been refactored according to AngularJS' best practices.
+
+New Functionality includes:
+    . Error management: a random error function is created to fabricate communication errors.
+    . Cart Module: includes a singleton service 'cart' and a cart-summary directive and a controller.
+    . URL Routes: now views are controlled using angular-route. Those are defined in the app.js module. Note that as an SPA urls are defined as http://localhost:5000/#/checkout http://localhost:5000/#/products etc. to avoid making the browser reload the entire application and thus lose all the changes.
