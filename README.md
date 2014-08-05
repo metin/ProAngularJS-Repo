@@ -117,3 +117,7 @@ New Functionality includes:
     . Error management: a random error function is created to fabricate communication errors.
     . Cart Module: includes a singleton service 'cart' and a cart-summary directive and a controller.
     . URL Routes: now views are controlled using angular-route. Those are defined in the app.js module. Note that as an SPA urls are defined as http://localhost:5000/#/checkout http://localhost:5000/#/products etc. to avoid making the browser reload the entire application and thus lose all the changes.
+
+009-sports-store: Implementation of the SportsStore application with the functionalities described on Chapter 8 up to the Making Improvements section. No backend has been defined.
+    New functionality includes:
+    . Form management and validation
