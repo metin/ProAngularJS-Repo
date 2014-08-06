@@ -121,3 +121,5 @@ New Functionality includes:
 009-sports-store: Implementation of the SportsStore application with the functionalities described on Chapter 8 up to the Making Improvements section. No backend has been defined.
     New functionality includes:
     . Form management and validation
+
+010-sports-store: In this project we create a Java BE application
