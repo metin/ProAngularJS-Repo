@@ -1,5 +1,7 @@
 package org.joolzminer.examples.sip.config;
 
+import org.joolzminer.examples.sip.security.AjaxAuthenticationFailureHandler;
+import org.joolzminer.examples.sip.security.AjaxAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +25,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
+	@Autowired
+	private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
+	
+	@Autowired
+	private AjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler;
+	
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new StandardPasswordEncoder();
@@ -31,15 +39,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-//			.formLogin()
-//				.usernameParameter("j_username")
-//				.passwordParameter("j_password")				
-//				.loginPage("/login")
-//				.loginProcessingUrl("/j_spring_security_check")
+			.formLogin()
+				.usernameParameter("j_username")
+				.passwordParameter("j_password")				
+				.loginPage("/adminapp/admin.html#/login")
+				.loginProcessingUrl("/j_spring_security_check")
+				.successHandler(ajaxAuthenticationSuccessHandler)
+				.failureHandler(ajaxAuthenticationFailureHandler)
 //				.failureUrl("/login?failed=true")
-//				.defaultSuccessUrl("/home")
-//				.permitAll()
-//				.and()
+//				.defaultSuccessUrl("/main")
+				.permitAll()
+				.and()
 //			.logout()
 //				.logoutSuccessUrl("/home")
 //				.permitAll()
@@ -52,7 +62,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/").permitAll()
 				.antMatchers(HttpMethod.GET, "/backendapp/products").permitAll()
+				.antMatchers(HttpMethod.POST, "/backendapp/products").permitAll()
+				.antMatchers(HttpMethod.POST, "/backendapp/products/*").permitAll()
+				.antMatchers(HttpMethod.DELETE, "/backendapp/products/*").permitAll()
 				.antMatchers(HttpMethod.POST, "/backendapp/orders").permitAll()
+				.antMatchers(HttpMethod.GET, "/backendapp/orders").permitAll()
+				.antMatchers(HttpMethod.GET, "/admin").permitAll()
 //				.antMatchers(HttpMethod.GET,  "/home").permitAll()
 //				.antMatchers(HttpMethod.GET,  "/admin").hasRole("ADMIN")
 //				.antMatchers(HttpMethod.GET,  "/forums").authenticated()
@@ -73,8 +88,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
-			.antMatchers("/static/**")
 			.antMatchers("/clientapp/**/**")
+			.antMatchers("/adminapp/**/**")
 			.antMatchers("/favicon.ico");
 	}
 

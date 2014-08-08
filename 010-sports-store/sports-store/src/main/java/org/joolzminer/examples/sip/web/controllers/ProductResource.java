@@ -8,6 +8,8 @@ import org.joolzminer.examples.sip.web.dto.utils.MapperHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,8 +28,23 @@ public class ProductResource {
 	private MapperHelper mapperHelper;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
-	public List<ProductDTO> processOrder() {
+	public List<ProductDTO> getProducts() {
 		return mapperHelper.fromProducts(productService.getProducts());
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void deleteProduct(@PathVariable("id") Long id) {
+		productService.deleteProduct(id);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
+		return mapperHelper.fromProduct(productService.createProduct(mapperHelper.toProduct(productDTO)));
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	public void updateProduct(@PathVariable("id") Long id, @RequestBody ProductDTO productDTO) {
+		productService.updateProduct(mapperHelper.toProduct(productDTO));
 	}
 }
 

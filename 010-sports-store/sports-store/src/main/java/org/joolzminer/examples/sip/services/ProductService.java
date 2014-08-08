@@ -39,4 +39,18 @@ public class ProductService {
 		return categoryRepository.findByName(categoryName);
 	}
 	
+	@Transactional(readOnly = false)
+	public void deleteProduct(Long id) {
+		productRepository.delete(id);
+	}
+	
+	@Transactional(readOnly = false)
+	public Product createProduct(Product product) {
+		return productRepository.save(product);
+	}
+	
+	@Transactional(readOnly = false)
+	public void updateProduct(Product product) {
+		productRepository.save(product);
+	}
 }

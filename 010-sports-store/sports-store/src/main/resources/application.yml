@@ -30,7 +30,7 @@ application:
         password: Accenture1
 
         initializer:
-            enabled: true
+            enabled: false
             separator: //
             
             scripts:

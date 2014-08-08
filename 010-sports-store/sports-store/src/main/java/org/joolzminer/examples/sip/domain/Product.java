@@ -39,6 +39,11 @@ public class Product extends AbstractEntity {
 		this.price = price;
 	}
 
+	public Product(Long id, Product product) {
+		this(product.category, product.name, product.description, product.price);
+		this.setId(id);
+	}
+	
 	public Category getCategory() {
 		return category;
 	}

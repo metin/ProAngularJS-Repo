@@ -1,5 +1,7 @@
 package org.joolzminer.examples.sip.web.controllers;
 
+import java.util.List;
+
 import org.joolzminer.examples.sip.domain.Order;
 import org.joolzminer.examples.sip.services.OrderService;
 import org.joolzminer.examples.sip.web.dto.OrderConfirmationDTO;
@@ -31,6 +33,11 @@ public class OrderResource {
 		Order order = orderService.processCustomerOrder(mapperHelper.toOrder(orderDTO));
 		
 		return new OrderConfirmationDTO(order.getId());
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
+	public List<OrderDTO> getOrders() {
+		return mapperHelper.fromOrders(orderService.getOrders());
 	}
 }
 

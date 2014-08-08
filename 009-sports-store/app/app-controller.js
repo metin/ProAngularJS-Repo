@@ -3,7 +3,7 @@
 
     angular.module('sportsStore')
         .constant('productsUrl', 'http://localhost:5000/app-backend/mocked-data/products.json')
-        .constant('orderUrl', 'http://localhost:5000/app-backend/orders')
+        .constant('orderUrl', 'http://localhost:9000/app-backend/orders')
         .controller('SportsStoreController', ['$http', 'productsUrl', 'orderUrl', 'cart', '$location',
                 function($http, productsUrl, orderUrl, cart, $location) {
             // this.products = [

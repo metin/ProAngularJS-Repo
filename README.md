@@ -122,4 +122,44 @@ New Functionality includes:
     New functionality includes:
     . Form management and validation
 
-010-sports-store: In this project we create a Java BE application
+010-sports-store: In this project we create a Java BE application for the SportsStore. The BE is based in the Spring in Practice Boot examples (chapter07-005-view-authorization-using-acls), and most of the classes are still there for reference.
+The client application is the one described on Chapter 8, from the Making Improvements section.
+The ones that are related to the SportsStore app are listed here:
+    . SecurityConfig: Modified to allow reaching the endpoints of SportsStoreBE and allow Login page.
+    . WebMvcConfig: Modified to redirect '/' to the store and '/admin' to the administration application
+    . Category: the domain class for the Product category
+    . Product: the domain class for the Product
+    . Order: the domain class for the Customer Order
+    . LineItem: the domain class for each of the components of a Customer Order
+    . CategoryRepository: The Spring Data Repository interface for Category class
+    . ProductRepository: The Spring Data Repository interface for Product class
+    . OrderRepository: The Spring Data Repository interface for Order class
+    . AjaxAuthenticationFailureHandler: as login is received as an Ajax request, this class handles authentication failures.
+    . AjaxAuthenticationSuccessHandler: as login is received as an Ajax request, this class handles authentication success.
+    . OrderService: Handles Order related business logic
+    . ProductService: Handles Product related business logic
+    . OrderResource: the REST controller for Order related operations
+    . ProductResource: the REST controller for Product related operations
+    . LineItemDTO: a DTO that decouples client facing LineItems from server facing LineItems
+    . OrderConfirmationDTO: a DTO that serves as a response when an Order has been successfully processed.
+    . OrderDTO: a DTO that decouples client facing LineItems from server facing LineItems
+    . ProductDTO: a DTO that decouples client facing LineItems from server facing LineItems
+    . MapperHelper: a helper that transforms DTO into domain classes as needed.
+    . application.yml: application is established on port 9001
+    . create-schema.xml: creates the tables for MySQL and some stored procedures to facilitate the creation of Products.
+    . insert-data.sql: inserts some products into the tables
+
+The applications are installed into src/main/webapp and the complete application can be run using:
+    mvn spring-boot:run
+The Embedded Tomcat is configured to serve the store in:
+    http://localhost:9001
+and the Administration application in:
+    http://localhost:9001/admin
+
+The login functionality is pretty basic, as it is possible to access the admin application functionality without having performed login by accessing the address: http://localhost:9001/adminapp/admin.html#/main
+(there is no view/method securization in place).
+The CSRF has also been disabled:
+    . Improvements:
+        . Secure the methods
+        . Implement CSRF
+        . Clean the classes that belong to the other project

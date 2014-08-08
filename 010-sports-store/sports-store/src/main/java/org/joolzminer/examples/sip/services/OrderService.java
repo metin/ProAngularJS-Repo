@@ -1,5 +1,7 @@
 package org.joolzminer.examples.sip.services;
 
+import java.util.List;
+
 import org.joolzminer.examples.sip.domain.Order;
 import org.joolzminer.examples.sip.repository.OrderRepository;
 import org.slf4j.Logger;
@@ -27,4 +29,8 @@ public class OrderService {
 		Assert.notEmpty(order.getLineItems(), "The order cannot be empty");
 		return orderRepository.save(order);
 	}	
+	
+	public List<Order> getOrders() {
+		return orderRepository.findAll();
+	}
 }
