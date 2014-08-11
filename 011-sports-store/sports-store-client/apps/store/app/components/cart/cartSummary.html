@@ -1,0 +1,8 @@
+<div class="navbar-right">
+    <div class="navbar-text">
+        <b>Your cart:</b>
+        {{cartCtrl.getItemCount()}} item(s),
+        {{cartCtrl.getTotal() | currency}}
+    </div>
+    <a href="#/checkout" class="btn btn-default navbar-btn">Checkout</a>
+</div>

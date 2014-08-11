@@ -1,0 +1,9 @@
+<div class="panel panel-default row" ng-controller="AdminMainController as adminMainCtrl">
+    <div class="col-xs-3 panel-body">
+        <a ng-repeat="item in adminMainCtrl.screens" class="btn btn-block btn-default"
+            ng-class="{'btn-primary': item === adminMainCtrl.currentScreen}"             
+            ng-click="adminMainCtrl.setScreen($index)">{{item}}</a>
+    </div>
+    <div class="col-xs-8 panel-body">
+        <div ng-include="adminMainCtrl.getScreen()"></div>
+</div>

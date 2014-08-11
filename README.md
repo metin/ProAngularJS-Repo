@@ -158,8 +158,17 @@ and the Administration application in:
 
 The login functionality is pretty basic, as it is possible to access the admin application functionality without having performed login by accessing the address: http://localhost:9001/adminapp/admin.html#/main
 (there is no view/method securization in place).
+
+Authentication Details:
+    . user: daniel, password: p@ssword
+
 The CSRF has also been disabled:
     . Improvements:
+        . Separate client and server apps.
         . Secure the methods
         . Implement CSRF
         . Clean the classes that belong to the other project
+        . Investigate the proxy middleware
+
+011-sports-store: The final version with a working backend that features Spring Security, login/logout functionality, etc.
+The application still lacks some advanced features such as CSRF support, or a layer in Angular that simulates the methods available in JSP to control whether the user has authenticated or not, etc.

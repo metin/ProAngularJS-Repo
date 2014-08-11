@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SportsStore Angular Application</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="store/app/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="store/app/bower_components/bootstrap/dist/css/bootstrap-theme.css">
+</head>
+
+<body>
+    <div class="navbar navbar-inverse">
+        <a class="navbar-brand" href="#">SPORTS STORE</a>
+        <cart-summary></cart-summary>
+    </div>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">SportsStore Client Side Applications</h3>
+            </div>
+            <div class="panel-body">
+                The client side of the SportsStore application consists of two separate AngularJS applications:
+                <ul>
+                    <li>
+                        The <a href="store/app/index.html">Customer Store</a>: where a customer can browse and select items, add them to a shopping cart and proceed to checkout.
+                    </li>
+                    <li>
+                        The <a href="admin/app/index.html">Administration Site</a>: where registered users and administrators can browse orders and maintain the products catalogue.
+                    </li>
+                </ul>
+                <div class="well well-sm">
+                    <h4>Note</h4>
+                    <p>
+                        The SportsStore client applications require the server side to be running.Visit <a href="http://localhost:9001">http://localhost:9001</a> to check it.
+                    </p>
+                </div> 
+            </div>
+        </div> 
+    </div>
+</body>
+
+</html>
