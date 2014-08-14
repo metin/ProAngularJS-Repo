@@ -182,6 +182,15 @@ The Module.value method lets you create services that return fixed values and ob
         this.tomorrow = nowValue + 1;
     }]);
 
+Note: the constant method is similar, but the one defined with constant can be used in the config phase.
+
+### Module Life Cycle: config and run
+The Module.config() and Module.run() lets you register functions that are invoked at key moments in the life cycle of an AngularJS app:
+    . config-registered behavior is invoked when the current module has been loaded
+    . run-registered behavior is invoked when all modules have been loaded
+
+
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -278,4 +287,4 @@ The application still lacks some advanced features such as CSRF support, or a la
 
 012-hello-angularjs: a simple AngularJS application that is used to illustrate the concepts presented on chapter 9 up to the "Using Modules to Organize Code" section.
 
-013-hello-angularjs-refactoring: a simple AngularJS application that is used to illustrate the concepts presented on chapter 9 up to the "Using Modules to Organize Code" section.
+013-hello-angularjs-refactoring: a simple AngularJS application that is used to illustrate the concepts presented on chapter 9 from "Using Modules to Organize Code" section the end. It also illustrates some basic concepts about the module lifecycle, by displaying in the console some messages that can be used to see how a constant value can be injected in the different phases of the module lifecycle.
