@@ -40,16 +40,16 @@ Angular provides several utility methods that complement out-of-the-box JavaScri
 
     . angular.forEach(array, function(value, index?){...}) : lets you iterate over an array while applying the given function to each of the elements of the array.
 
-    . angular.isDefined(arg) : returns true if the argument is not undefined (null arg returns true) 
+    . angular.isDefined(arg) : returns true if the argument is not undefined (null arg returns true)
     . angular.isUndefined(arg) : returns true if the argument is undefined (null arg returns false)
 
 ## Promises
 Promises are the JavaScript way of representing an item of work that will be performed asynchronously and that will be completed at some time in the future. The most common way to encounter promises is by making Ajax requests: the browser makes the HTTP request in the background and uses a promise to notify your application when the request has completed.
 Example syntax is:
-    var promise = $http.get('todo.json');   // create a promise obj associated to the retrieval of todo.json 
+    var promise = $http.get('todo.json');   // create a promise obj associated to the retrieval of todo.json
     promise.success(function (data) {       // when request is completed successully execute the given function
         ...
-    }); 
+    });
 
 The $http.get method returns a promise object that you can use to register a callback function that will be invoked when the request has been completed.
 
@@ -62,7 +62,7 @@ In the case of $http operations, the success callback is passed the data retriev
 
 The three methods return other Promise objects, allowing asyn tasks to be chained together in sequence.
 Example (chaining:)
-        $http.get('todo.json').then(function (response) { 
+        $http.get('todo.json').then(function (response) {
             $scope.todos = response.data;
         }, function () {
             $scope.todos.push({action: 'error encountered while reading data from the server'});
@@ -78,6 +78,109 @@ The JavaScript Object Notation has become the de facto standard data format for 
 Angular makes working with JSON simple:
     . When you request JSON via AJAX, the response will be parsed automatically into JavaScript objects and passed to the success function.
     . Additionally, angular provides angular.toJson and angular.fromJson to explicitly encode and decode JSON data.
+
+## Modules
+Modules are the top-level components for AngularJS applications and have three main roles in AngularJS:
+    . To associate an AngularJS application with a region of an HTML document
+    . To act as a gateway to key AngularJS framework features
+    . To help organize code and components in an AngularJS application
+
+Modules are defined using:
+    var app = angular.module('exampleApp', []);
+
+When creating a module that will be associated with an HTML document the convention is to give the module the suffix APP such as in exampleAPP:
+    <html ng-app="exampleApp">
+
+The module() method is overloaded, and when used without parameters returns an instance of an existing module:
+    var existingModule = angular.module('exampleApp');
+
+Any AngularJS module can rely on components (services, filters, directives, etc.) defined in other modules, and this feature makes it very easy to organize the code in a complex application.
+
+### Module Controllers
+Controllers in AngularJS applications act as a conduit between the model and the views - they deliver data and behavior to the view.
+
+    app.controller('MainController', function($scope) {
+        ...
+    });
+
+You can apply a controller to a view using the ng-controller directive:
+    <div class="panel" ng-controller="MainController as mainCtrl">
+        I can use the mainCtrl data and behavior here
+    </div>
+
+A controller can support multiple views, which allows the same data to be presented in different ways. An application will contain multiple controllers.
+
+### Module Directives
+Directives let you extend and enhance HTML to create rich web applications.
+    app.directive('cart', function() {
+        return {
+            restrict: 'E',
+            templateUrl: '/components/cart/cart.html',
+            controller: function() {
+                ... controller data and behavior ...
+            },
+            controllerAs: 'cartCtrl'
+        };
+    });
+
+and also:
+    app.directive('highlight', [function() {
+        return function(scope, element, attrs) {
+            if (scope.dayName === attrs.highlight) {
+                element.css('color', 'red');
+            }
+        };
+    }]);
+
+Note that directive accepts a factory function, so called because they're responsible for creating the object that AngularJS will employ for creating the object. Often factory functions return Worker functions (as in this case). Worker functions are the functions AngularJS will use to perform some work, in this case, each time AngularJS needs to apply the directive the return function of the factory function will be called.
+
+### Module Filters
+Filters are used in views to format the data displayed to the user. They are typically used to ensure consistency in data presentation across multiple controllers and views.
+
+    app.filter('dayName', [function() {
+        return function(inputParam) {
+            ... return some filtered data ...
+        };
+    }]);
+
+Filters are applied in template expressions contained in views:
+{{tomorrow | dayName}}
+
+and you can apply a filter's functionality programmatically using $filter
+
+        var dayFilter = $filter('dayName');
+            if (dayFilter(scope.dayName) === attrs.highlight) {
+                element.css('color', 'red');
+            }
+
+### Module Services
+Services are singleton objects that provide any functionality that you want to use throughout an application. Some key AngularJS functionalities are delivered as services ($scope, $filter, $http, ...)
+The Module objects provide three methods to create services: service, factory and provider (the three are closely related).
+
+    app.service('daysService', [function() {
+        this.today = new Date().getDay();
+        this.tomorrow = this.today + 1;
+    }]);
+
+The service method receives the name of the service and a factory method. When AngularJS calls this function it assigns a new object that is accessible via this keyword, so this.today and this.tomorrow will be accessible from within the code just by injecting daysService and using daysService.today and daysService.tomorrow:
+
+    app.controller('TodayController', ['$scope', 'daysService', function($scope, daysService) {
+        $scope.dayName = daysService.today;
+
+    }]);
+
+It is also important to note that you can create your components in any order and AngularJS will ensure that everything is set up correctly before it starts calling the factory functions and performing DI.
+
+### Module Values
+The Module.value method lets you create services that return fixed values and objects. Thanks to this option, you will be able to use DI with those.
+
+    var now = new Date();
+    app.value('nowValue', now);
+
+    app.service('daysService', ['nowValue', function(nowValue) {
+        this.today = nowValue;
+        this.tomorrow = nowValue + 1;
+    }]);
 
 # Examples
 
@@ -172,3 +275,7 @@ The CSRF has also been disabled:
 
 011-sports-store: The final version with a working backend that features Spring Security, login/logout functionality, etc.
 The application still lacks some advanced features such as CSRF support, or a layer in Angular that simulates the methods available in JSP to control whether the user has authenticated or not, etc.
+
+012-hello-angularjs: a simple AngularJS application that is used to illustrate the concepts presented on chapter 9 up to the "Using Modules to Organize Code" section.
+
+013-hello-angularjs-refactoring: a simple AngularJS application that is used to illustrate the concepts presented on chapter 9 up to the "Using Modules to Organize Code" section.

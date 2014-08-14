@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS AppS</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</head>
+<body>
+    <div class="container-fluid" >
+        <h1>AngularJS App</h1>
+        <div class="well well-sm" ng-controller="TodayController as dayCtrl" highlight="Friday">
+            Today is {{dayName || '(unknown)' | dayName}}
+        </div>
+
+        <div class="alert alert-info" ng-controller="TomorrowController as tomorrowCtrl">
+            Tomorrow is {{tomorrow || '(unknown)' | dayName}}
+        </div>
+    </div>
+</body>
+</html>
