@@ -404,3 +404,4 @@ The application still lacks some advanced features such as CSRF support, or a la
 016-html-fragments: Illustrates the ng-include directive for working with HTML fragments. This corresponds to the section from Working with Partial Views on Chapter 10.
 
 017-todo-dynamic-view: The static To Do list application featuring a checkbox that lets you select whether you want to see the items as a table or as an ordered list. It illustrates how to use ng-include attribute to select partial views dynamically.
+Besides, the information in the Done column should read (Done) when it is completed.

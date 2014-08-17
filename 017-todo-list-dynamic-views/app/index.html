@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS Directives</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app-controllers.js"></script>
+</head>
+<body>
+    <div id="todoPanel" class="panel panel-default" ng-controller="DefaultController as defaultCtrl" >
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            To Do List
+        </h3>
+        <form role="form">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="asList">Show contents as list</label>
+                </label>
+            </div>
+        </form>
+    </div>
+    <div class="panel-body">
+        <ng-include src="showView()"></ng-include>
+    </div>
+</body>
+</html>
