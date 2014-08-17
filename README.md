@@ -226,7 +226,7 @@ Two-way data bindings can be applied only to elements that allow user to provide
 ### Template Directives
 The template directives are a set of AngularJS directives that can be used to generate HTML elements using templates, making it easy to work with data collections and add basic logic to a template that responds to the state of the data.
 
-#### Generating Elements Repeatedly
+### Generating Elements Repeatedly
 The ng-repeat directive can be used to generate the same content for each item in a collection:
     <tr ng-repeat="todo in todos">
         <td>{{todo.action}}</td>
@@ -284,6 +284,20 @@ AngularJS also provides the ng-repeat-start and ng-repeat-end directives useful 
     </tbody>
 
 See how ng-repeat-start and ng-repeat-end begins a block in which the element extracted from the collection can be used. This lets you in the example above generate 3 rows for each item.
+
+### Working with HTML fragments
+The ng-include directive retrieves a fragment of HTML content from the server, compiles it to process any directives that it might contain and adds it to the DOM. These fragment are sometimes known as partial views (or partials).
+
+    <div class="panel-body">
+        <ng-include src="'components/table/table.html'"></ng-include>
+    </div>
+
+This directive has the following configuration parameters:
+    . src: specifies the URL of the content to load. Note that src attribute is evaluated as a JavaScript expression and therefore, requires '' when using a static view.
+    . onload: specifies an expression to be evaluated when the content is loaded
+    . autoscroll: specifies whether AngularJS should scroll the viewport when the content is loaded
+
+
 
 # Examples
 
@@ -386,3 +400,7 @@ The application still lacks some advanced features such as CSRF support, or a la
 014-directives: Illustrates one-way and two-way data binding directives in a simple example that follows the book test from the beginning of AngularJS example app for chapter 10 - Using Bindings and Template directives up to the Using the Template Directives.
 
 015-repeat-template-directives: Illustrates the different scenarios for ng-repeat directive, which corresponds from Using the Template Directives section to Working with Partial Views (excluded).
+
+016-html-fragments: Illustrates the ng-include directive for working with HTML fragments. This corresponds to the section from Working with Partial Views on Chapter 10.
+
+017-todo-dynamic-view: The static To Do list application featuring a checkbox that lets you select whether you want to see the items as a table or as an ordered list. It illustrates how to use ng-include attribute to select partial views dynamically.
