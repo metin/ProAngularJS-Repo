@@ -189,7 +189,42 @@ The Module.config() and Module.run() lets you register functions that are invoke
     . config-registered behavior is invoked when the current module has been loaded
     . run-registered behavior is invoked when all modules have been loaded
 
+## Directives
+Directives are the most powerful AngularJS feature; they allow you to extend HTML to create the foundation for rich an complex web apps in a way that is naturally expressive: You crete AngularJS web apps by embracing and enhancing HTML.
 
+### Data Binding Directives
+The data binding directives are responsible for performing data binding between the values from the model and the values that appear on the HTML document (view).
+
+Typically, data binding directives can be applied as an attribute or class directives:
+    There are <span ng-bind="todos.length"></span> items.
+        vs.
+    There are <span class="ng-bind: todos.length"></span> items.
+
+Where possible, the first option is preferred, as it is more expressive.
+
+#### One-Way Bindings
+One-way binding means a value is taken from the data model and inserted into the HTML element. The binding is live, which means that when the value associated with the binding is changed, the HTML element will be updated to reflect the new value.
+
+The `ng-bind` directive is used for creating one-way data binding, but it is rarely used as the syntax: {{data}} is preferred. This template replaces the content of the element that is applied to and can be used only for a single data item:
+    There are <span ng-bind="todos.length"></span> item(s).
+
+The ng-bind-template replaces the content of the element that is applied to with the specified template:
+    <div ng-bind-template="First: {{todos[0].action}}; Second: {{todos[1].action}}">
+    </div>
+
+You can also prevent inline data-binding using ng-non-bindable directive:
+        <div ng-non-bindable>
+            There are {{todos.length}} item(s).  <-- AngularJS will not perform data binding here
+        </div>
+
+#### Two-way Data Bindings
+Two way data bindings track changes in both directions, allowing elements that gather data from the user to modify the state of the application.
+    <input class="form-control" ng-model="todos[0].action" placeholder="First Item"/>
+
+Two-way data bindings can be applied only to elements that allow user to provide a dat value (input, textarea and select elements). Changes to data model properties are disseminated to all of the relevant bindings ensuring that the application is kept in sync.
+
+### Template Directives
+The template directives are a set of AngularJS directives that can be used to generate HTML elements using templates, making it easy to work with data collections and add basic logic to a template that responds to the state of the data.
 
 # Examples
 
@@ -288,3 +323,7 @@ The application still lacks some advanced features such as CSRF support, or a la
 012-hello-angularjs: a simple AngularJS application that is used to illustrate the concepts presented on chapter 9 up to the "Using Modules to Organize Code" section.
 
 013-hello-angularjs-refactoring: a simple AngularJS application that is used to illustrate the concepts presented on chapter 9 from "Using Modules to Organize Code" section the end. It also illustrates some basic concepts about the module lifecycle, by displaying in the console some messages that can be used to see how a constant value can be injected in the different phases of the module lifecycle.
+
+014-directives: Illustrates one-way and two-way data binding directives in a simple example that follows the book test from the beginning of AngularJS example app for chapter 10 - Using Bindings and Template directives up to the Using the Template Directives.
+
+015-template-directives:

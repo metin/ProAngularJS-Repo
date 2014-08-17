@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS Directives</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app-controllers.js"></script>
+<!--     <script type="text/javascript" src="app-filters.js"></script>
+    <script type="text/javascript" src="app-services.js"></script>
+    <script type="text/javascript" src="app-directives.js"></script>
+ --></head>
+<body>
+    <div id="todoPanel" class="panel panel-default" ng-controller="DefaultController as defaultCtrl" >
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            To Do List
+        </h3>
+    </div>
+    <div class="panel-body">
+        <!-- One Way Data Binding -->
+        There are {{todos.length}} item(s).
+        <div>
+            There are <span ng-bind="todos.length"></span> item(s).
+        </div>
+        <div ng-bind-template="First: {{todos[0].action}}; Second: {{todos[1].action}}">
+        </div>
+        <div ng-non-bindable>
+            There are {{todos.length}} item(s).
+        </div>
+
+        <!-- Two-way Data Binding -->
+        <div class="well well-lg">
+            The first item is: {{todos[0].action}}
+        </div>
+        <div class="well">
+            <form role="form">
+                <div class="form-group">
+                    <label>First Item</label>
+                    <input class="form-control" ng-model="todos[0].action" placeholder="First Item"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
