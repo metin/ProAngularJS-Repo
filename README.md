@@ -226,6 +226,65 @@ Two-way data bindings can be applied only to elements that allow user to provide
 ### Template Directives
 The template directives are a set of AngularJS directives that can be used to generate HTML elements using templates, making it easy to work with data collections and add basic logic to a template that responds to the state of the data.
 
+#### Generating Elements Repeatedly
+The ng-repeat directive can be used to generate the same content for each item in a collection:
+    <tr ng-repeat="todo in todos">
+        <td>{{todo.action}}</td>
+        <td>{{todo.complete}}</td>
+    </tr>
+
+The directive iterates through the objects in the array, creates a new instance of the element and its content, and the processes the templates it contains.
+
+It is also possible to use ng-repeat to enumerate the properties of an object:
+    <tr ng-repeat="todo in todos">   <-- Iterate over todos collection of items
+        <td ng-repeat="prop in todo"> <-- Iterate over todo object properties
+            {{prop}}
+        </td>
+    </tr>
+
+You can also obtain the item extracted from the collection as a pair of {key, value} properties:
+    <tr ng-repeat="(key, value) in todos">
+        <td>{{key}}</td>                        <-- 0: {action: 'Get groceries', completed: false},
+        <td>{{value}}</td>                          1: {action: 'Call plumber', completed: false}...
+    </tr>
+
+
+    <tr ng-repeat="todo in todos">
+        <td ng-repeat="(key, value) in todo">
+            {{key}}={{value}}                   <-- action=Get groceries, completed=false, ...
+        </td>
+    </tr>
+
+When using ng-repeat, AngularJS also provides a set of built-in variables that provide context for the data being processed:
+    . $index: the index of the processed item in the collection
+    . $first: true if the current object is the first element of the collection
+    . $middle: true if the current object is neither first nor last
+    . $last: true if the current object is the last element of the collection
+    . $even: true if the current object corresponds to an even position
+    . $odd: true if the current object corresponds to an odd position
+
+    <tr ng-repeat="todo in todos">
+        <td>{{$index + 1}}</td>         <-- 0+1, 1+1, ..
+        <td ng-repeat="prop in todo">
+            {{prop}}
+        </td>
+    </tr>
+
+AngularJS also provides the ng-repeat-start and ng-repeat-end directives useful to generate multiple table rows for each data item.
+    <tbody>
+        <tr ng-repeat-start="item in todos">
+            <td>This is item {{$index}}</td>
+        </tr>
+        <tr>
+            <td>The action is: {{item.action}}</td>
+        </tr>
+        <tr ng-repeat-end>
+            <td>Item {{$index}} is {{item.complete? '' : 'not '}} complete</td>
+        </tr>
+    </tbody>
+
+See how ng-repeat-start and ng-repeat-end begins a block in which the element extracted from the collection can be used. This lets you in the example above generate 3 rows for each item.
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -326,4 +385,4 @@ The application still lacks some advanced features such as CSRF support, or a la
 
 014-directives: Illustrates one-way and two-way data binding directives in a simple example that follows the book test from the beginning of AngularJS example app for chapter 10 - Using Bindings and Template directives up to the Using the Template Directives.
 
-015-template-directives:
+015-repeat-template-directives: Illustrates the different scenarios for ng-repeat directive, which corresponds from Using the Template Directives section to Working with Partial Views (excluded).

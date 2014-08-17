@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS Directives</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app-controllers.js"></script>
+    <style type="text/css">
+        .odd {
+            background-color: lightcoral;
+        }
+        .even {
+            background-color: lavenderblush;
+        }
+    </style>
+</head>
+<body>
+    <div id="todoPanel" class="panel panel-default" ng-controller="DefaultController as defaultCtrl" >
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            To Do List
+        </h3>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Done</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="todo in todos">
+                    <td>{{todo.action}}</td>
+                    <td>{{todo.complete}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Done</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="todo in todos">
+                    <td ng-repeat="prop in todo">
+                        {{prop}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Done</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(key, value) in todos">
+                    <td>{{key}}</td>
+                    <td>{{value}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Done</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="todo in todos">
+                    <td ng-repeat="(key, value) in todo">
+                        {{key}}={{value}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Action</th>
+                    <th>Done</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="todo in todos">
+                    <td>{{$index + 1}}</td>
+                    <td ng-repeat="prop in todo">
+                        {{prop}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Action</th>
+                    <th>Done</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="todo in todos" ng-class="$odd ? 'odd' : 'even'">
+                    <td>{{$index + 1}}</td>
+                    <td ng-repeat="prop in todo">
+                        {{prop}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table">
+            <tbody>
+                <tr ng-repeat-start="item in todos">
+                    <td>This is item {{$index}}</td>
+                </tr>
+                <tr>
+                    <td>The action is: {{item.action}}</td>
+                </tr>
+                <tr ng-repeat-end>
+                    <td>Item {{$index}} is {{item.complete? '' : 'not '}} complete</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
