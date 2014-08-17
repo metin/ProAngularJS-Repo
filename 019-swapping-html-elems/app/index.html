@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS Directives</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app-controllers.js"></script>
+</head>
+<body>
+    <div id="todoPanel" class="panel panel-default" ng-controller="DefaultController as defaultCtrl" >
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            To Do List
+        </h3>
+        <form role="form">
+            <div class="radio" ng-repeat="button in ['None', 'Table', 'List']">
+                <label>
+                    <input type="radio" ng-model="data.mode" value="{{button}}" ng-checked="$first" />
+                    {{button}}
+                </label>
+            </div>
+        </form>
+    </div>
+    <div class="panel-body">
+        <div ng-switch on="data.mode">
+            <div ng-switch-when="Table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Action</th>
+                            <th>Done</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="todo in todos">
+                            <td>{{$index + 1}}</td>
+                            <td ng-repeat="todoProp in todo">
+                                {{todoProp}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-switch-when="List">
+                <ol>
+                    <li ng-repeat="todo in todos">
+                        {{todo.action}}
+                        <span ng-if="todo.complete">(done)</span>
+                    </li>
+                </ol>
+            </div>
+            <div ng-switch-default>
+                Select another option to display a layout
+            </div>
+        </div>
+    </div>
+</body>
+</html>

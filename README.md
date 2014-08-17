@@ -297,7 +297,38 @@ This directive has the following configuration parameters:
     . onload: specifies an expression to be evaluated when the content is loaded
     . autoscroll: specifies whether AngularJS should scroll the viewport when the content is loaded
 
+The ng-include directive can also be used as an attribute in other element:
+    <div class="panel-body">
+        <div ng-include="showView()" onload="reportChange()"></div>
+    </div>
 
+
+### Conditionally Swapping Elements
+AngularJS provide the ng-switch directive when you need to switch between smaller chunks of content that are already within the document.
+
+        <div ng-switch on="data.mode">
+            <div ng-switch-when="Table">
+                <table class="table">
+                    <tr ng-repeat="todo in todos">
+                        <td>{{$index + 1}}</td>
+                        <td ng-repeat="todoProp in todo">
+                            {{todoProp}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div ng-switch-when="List">
+                <ol>
+                    <li ng-repeat="todo in todos">
+                        {{todo.action}}
+                        <span ng-if="todo.complete">(done)</span>
+                    </li>
+                </ol>
+            </div>
+            <div ng-switch-default>
+                Select another option to display a layout
+            </div>
+        </div>
 
 # Examples
 
@@ -403,5 +434,9 @@ The application still lacks some advanced features such as CSRF support, or a la
 
 016-html-fragments: Illustrates the ng-include directive for working with HTML fragments. This corresponds to the section from Working with Partial Views on Chapter 10.
 
-017-todo-dynamic-view: The static To Do list application featuring a checkbox that lets you select whether you want to see the items as a table or as an ordered list. It illustrates how to use ng-include attribute to select partial views dynamically.
+017-todo-dynamic-views: The static To Do list application featuring a checkbox that lets you select whether you want to see the items as a table or as an ordered list. It illustrates how to use ng-include attribute to select partial views dynamically.
 Besides, the information in the Done column should read (Done) when it is completed.
+
+018-todo-dynamic-views-as-attrib: The same example as 017- but using ng-include as an attribute inside a div.
+
+019-swapping-html-elems: Illustrates how to use ng-switch to conditionally display small chunks of html.
