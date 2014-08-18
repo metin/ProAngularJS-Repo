@@ -573,4 +573,5 @@ Besides, the information in the Done column should read (Done) when it is comple
 
 031-form-input-elem-directives: Illustrate AngularJS directives that can be applied to input elements.
 
-032-
+032-form-checkbox-elem-directives: Illustrate AngularJS directives that can be applied to checkboxes.
+Note that when you use the required attribute, the example fails.
