@@ -424,6 +424,16 @@ Using two-way data bindings allows you to implicitly create properties in the da
 
 To solve this you can either explicitly define those properties in the model, or add some guards in the controller methods that read those properties only when those are defined (using angular.isDefined, for example).
 
+### Form Validation
+The first thing you must do to control a form validation is to include a <form> element with a name. After that, you must disable HTML5 browser validation so you have to use novalidate attribute in the form.
+Then, you can use in the input elements required to control whether an element is required or not.
+Additionally, AngularJS provides the following validation variables to control the status of the form:
+    . $pristine : true if the user has not interacted with the element/form
+    . $dirty    : true if the user has interacted with the element/form
+    . $valid    : true if the contents of the element/form is valid
+    . $invalid  : true if the contents of the element/form is invalid
+    . $error    : provide details about the validation errors
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -552,3 +562,9 @@ Besides, the information in the Done column should read (Done) when it is comple
 027-managing-other-attributes: illustrates how to manage other attributes with an example that uses ng-src to set the src attribute of an img element.
 
 028-forms-implicit-model-creation: illustrates how you can implicitly create model properties using ng-model directive.
+
+029-basic-form-validation: illustrates how you can perform basic form validation including:
+    . disabling submission when required input elements not populated
+    . providing validation feedback using CSS
+    . providing validation feedback using elements (error tooltips)
+    . discerning between format and required for validation errors
