@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS Directives</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app-controllers.js"></script>
+    <style type="text/css">
+        .thumb {
+            max-width: 180px;
+            max-height: 100px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel panel-default" ng-controller="DefaultController as defaultCtrl">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-4" ng-repeat="image in images">
+                    <a href class="thumbnail"  ng-click="setSelectedImage($index)">
+                        <img ng-src="{{image}}" class="thumb">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <img ng-src="{{getSelectedImage()}}">
+        </div>
+    </div>
+ </body>
+</html>

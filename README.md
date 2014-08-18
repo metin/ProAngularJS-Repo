@@ -404,6 +404,20 @@ AngularJS provides the following directives to manage boolean attributes found o
     . ng-readonly : to manage the readonly attribute of input elements
     . ng-selected : to manage the selected attribute of an option element
 
+#### Other Attributes
+There are three directives that AngularJS provides to work on attributes:
+    . ng-href    : sets the href attribute on an <a> element
+    . ng-src     : sets the src attribute of an img element
+    . ng-srcset : sets the srcset on img selement.
+
+    <div ng-repeat="image in images">
+        <a href class="thumbnail"  ng-click="setSelectedImage($index)">
+            <img ng-src="{{image}}" class="thumb">
+        </a>
+    </div>
+
+Note that ng-src requires using {{}}.
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -528,3 +542,5 @@ Besides, the information in the Done column should read (Done) when it is comple
 025-custom-event-directive: illustrates how to create a custom directive to handle touch events.
 
 026-managing-boolean-attributes: illustrates how to manage boolean attributes with an example that uses ng-disabled to disable a button using a value from the model.
+
+027-managing-other-attributes: illustrates how to manage other attributes with an example that uses ng-src to set the src attribute of an img element.
