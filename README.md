@@ -577,3 +577,5 @@ Besides, the information in the Done column should read (Done) when it is comple
 Note that when you use the required attribute, the example fails.
 
 033-form-textarea-elem-directives: Illustrate AngularJS directives that can be applied to textboxes.
+
+034-form-select-elem-directives: Illustrate AngularJS directives that can be applied to select elements.
