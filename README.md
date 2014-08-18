@@ -570,3 +570,7 @@ Besides, the information in the Done column should read (Done) when it is comple
     . discerning between format and required for validation errors
 
 030-deferring-form-validation: Illustrate how to defer the validation feedback until the submit button is clicked. AngularJS does not provide built-in support for this but you can achieve it defining some behavior in the controller.
+
+031-form-input-elem-directives: Illustrate AngularJS directives that can be applied to input elements.
+
+032-
