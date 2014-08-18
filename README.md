@@ -330,6 +330,14 @@ AngularJS provide the ng-switch directive when you need to switch between smalle
             </div>
         </div>
 
+### Hiding Unprocessed Inline Template Binding Expressions
+There can be a moment when the browser displays the HTML in the document while AngularJS is still parsing the HTML so that the {{}} are visible.
+The ng-cloak directive can be used to hide that content until AngularJS has finished parsing it.
+
+You can apply that directive to the body, so that nothing is displayed to the user until the HTML is ready to be presented to the user, or you can be more selective and apply that directive only to the blocks in which {{}} are being used.
+
+
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -440,3 +448,5 @@ Besides, the information in the Done column should read (Done) when it is comple
 018-todo-dynamic-views-as-attrib: The same example as 017- but using ng-include as an attribute inside a div.
 
 019-swapping-html-elems: Illustrates how to use ng-switch to conditionally display small chunks of html.
+
+020-hiding-unprocessed-moustaches: Illustrates how to prevent {{}} from showing while AngularJS is parsing the document using the ng-cloak directive.
