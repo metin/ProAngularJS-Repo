@@ -363,6 +363,39 @@ The ng-style directive is configured using an object whose properties correspond
 
 AngularJS also offers ng-class-even and ng-class-odd to apply the classes only to even or odd numbered elements.
 
+#### Handling Events
+HTML elements define events, which provide async notifications of user interactions. AngularJS defines a set of directives that specify custom behaviors when different types of events are triggered:
+    . ng-blur       : an element loses its focus
+    . ng-change     : an element content changes (inputs, checkboxes, etc.)
+    . ng-click      : user clicks the mouse
+    . ng-copy       : copy, cut, paste events
+    . ng-cut        :
+    . ng-paste      :
+    . ng-dblclick   : user double-clicks on an element
+    . ng-focus      : element gains focus
+    . ng-keydown    : key related events
+    . ng-keypress   :
+    . ng-keyup      :
+    . ng-mousedown  : mouse related events
+    . ng-mouseenter :
+    . ng-mouseleave :
+    . ng-mousemove  :
+    . ng-mouseover  :
+    . ng-mouseup    :
+    . ng-submit     : triggered when a form is submitted
+
+    <button class="btn btn-info" ng-click="data.rowColor = button">{{button}}</button>
+
+    <tr ng-repeat="todo in todos" ng-class="data.rowColor"
+        ng-mouseenter="handleEvent($event)"
+        ng-mouseleave="handleEvent($event)">
+        <td>{{$index + 1}}</td>
+        <td>{{todo.action}}</td>
+        <td ng-class="data.columnColor">{{todo.complete}}</td>
+    </tr>
+
+All of the event directives define the special $event variable to access the Event object.
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
