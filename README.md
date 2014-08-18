@@ -514,3 +514,7 @@ Besides, the information in the Done column should read (Done) when it is comple
 022-table-striping: Demonstrates how using ng-repeat and ng-hide create inconsisting table striping (even when using Bootstrap) because elements are not removed from the DOM, but only hidden using CSS. The example also illustrates two techniques to solve it: using ng-if to effectively remove the elements from the DOM and also apply a filter to remove the elements that you don't want to be displayed.
 
 023-classes-and-styles: illustrates how to use ng-class and ng-style.
+
+024-events: illustrates how to use several built-in event directives such as ng-click, ng-mouseenter, etc.
+
+025-custom-event-directive: illustrates how to create a custom directive to handle touch events.
