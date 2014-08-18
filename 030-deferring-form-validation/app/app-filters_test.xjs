@@ -1,0 +1,6 @@
+/* global describe */
+
+describe('exampleApp.Filters', function() {
+    'use strict';
+
+});
