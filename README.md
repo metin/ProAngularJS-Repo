@@ -336,7 +336,13 @@ The ng-cloak directive can be used to hide that content until AngularJS has fini
 
 You can apply that directive to the body, so that nothing is displayed to the user until the HTML is ready to be presented to the user, or you can be more selective and apply that directive only to the blocks in which {{}} are being used.
 
+### Element Directives
+Element Directives are used to configure and style elements in the DOM.
 
+#### Showing, Hiding and Removing Elements
+The ng-show and ng-hide directives control the visibility of elements by applying CSS that shows/hides that element from the user (note that the element will still be there.)
+
+The ng-if directive removes a certain element from the DOM if the condition is not met.
 
 # Examples
 
@@ -450,3 +456,5 @@ Besides, the information in the Done column should read (Done) when it is comple
 019-swapping-html-elems: Illustrates how to use ng-switch to conditionally display small chunks of html.
 
 020-hiding-unprocessed-moustaches: Illustrates how to prevent {{}} from showing while AngularJS is parsing the document using the ng-cloak directive.
+
+021-showing-hiding-removing-elemts: Illustrates the ng-show, ng-hide and ng-if directives as explained on Chapter 11 section Showing, Hiding and Removing Elements.
