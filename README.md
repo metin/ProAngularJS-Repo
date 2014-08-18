@@ -418,6 +418,12 @@ There are three directives that AngularJS provides to work on attributes:
 
 Note that ng-src requires using {{}}.
 
+## Forms
+
+Using two-way data bindings allows you to implicitly create properties in the data model - a feature that is useful when you are using form elements to gather data from the user. Nevertheless, it sometimes have some drawbacks as those properties may be undefined if the user has not interacted with the elements in which those properties have been implicitly defined.
+
+To solve this you can either explicitly define those properties in the model, or add some guards in the controller methods that read those properties only when those are defined (using angular.isDefined, for example).
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -544,3 +550,5 @@ Besides, the information in the Done column should read (Done) when it is comple
 026-managing-boolean-attributes: illustrates how to manage boolean attributes with an example that uses ng-disabled to disable a button using a value from the model.
 
 027-managing-other-attributes: illustrates how to manage other attributes with an example that uses ng-src to set the src attribute of an img element.
+
+028-forms-implicit-model-creation: illustrates how you can implicitly create model properties using ng-model directive.
