@@ -396,6 +396,14 @@ HTML elements define events, which provide async notifications of user interacti
 
 All of the event directives define the special $event variable to access the Event object.
 
+#### Boolean Attributes
+AngularJS provides the following directives to manage boolean attributes found on HTML elements:
+    . ng-checked  : to manage checked attribute on input elements
+    . ng-disabled : to manage disabled attribute on input and button elements
+    . ng-open     : to manage the open attribute of details elements
+    . ng-readonly : to manage the readonly attribute of input elements
+    . ng-selected : to manage the selected attribute of an option element
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -518,3 +526,5 @@ Besides, the information in the Done column should read (Done) when it is comple
 024-events: illustrates how to use several built-in event directives such as ng-click, ng-mouseenter, etc.
 
 025-custom-event-directive: illustrates how to create a custom directive to handle touch events.
+
+026-managing-boolean-attributes: illustrates how to manage boolean attributes with an example that uses ng-disabled to disable a button using a value from the model.
