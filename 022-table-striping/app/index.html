@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS Directives</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app-controllers.js"></script>
+</head>
+<body>
+    <div id="todoPanel" class="panel panel-default" ng-controller="DefaultController as defaultCtrl" >
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                To Do List
+            </h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Action</th>
+                        <th>Done</th>
+                    </tr>
+                </thead>
+                <tbody ng-cloak>
+                    <tr ng-repeat="todo in todos" ng-hide="todo.complete"> <!-- inconsistent striping -->
+                        <td>{{$index + 1}}</td>
+                        <td>{{todo.action}}</td>
+                        <td>{{todo.complete}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- No Transclusion problems anymore -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Action</th>
+                        <th>Done</th>
+                    </tr>
+                </thead>
+                <tbody ng-cloak>
+                    <tr ng-repeat="todo in todos" ng-if="!todo.complete">
+                        <td>{{$index + 1}}</td>
+                        <td>{{todo.action}}</td>
+                        <td>{{todo.complete}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Old school solution: use a filter -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Action</th>
+                        <th>Done</th>
+                    </tr>
+                </thead>
+                <tbody ng-cloak>
+                    <tr ng-repeat="todo in todos | filter: {complete: 'false'}">
+                        <td>{{$index + 1}}</td>
+                        <td>{{todo.action}}</td>
+                        <td>{{todo.complete}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

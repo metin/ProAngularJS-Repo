@@ -344,6 +344,9 @@ The ng-show and ng-hide directives control the visibility of elements by applyin
 
 The ng-if directive removes a certain element from the DOM if the condition is not met.
 
+#### Managing CSS classes
+The ng-class and ng-style directives can be used to assign elements to classes and set individual CSS properties.
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -458,3 +461,5 @@ Besides, the information in the Done column should read (Done) when it is comple
 020-hiding-unprocessed-moustaches: Illustrates how to prevent {{}} from showing while AngularJS is parsing the document using the ng-cloak directive.
 
 021-showing-hiding-removing-elemts: Illustrates the ng-show, ng-hide and ng-if directives as explained on Chapter 11 section Showing, Hiding and Removing Elements.
+
+022-table-striping: Demonstrates how using ng-repeat and ng-hide create inconsisting table striping (even when using Bootstrap) because elements are not removed from the DOM, but only hidden using CSS. The example also illustrates two techniques to solve it: using ng-if to effectively remove the elements from the DOM and also apply a filter to remove the elements that you don't want to be displayed.
