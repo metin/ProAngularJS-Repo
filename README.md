@@ -611,6 +611,54 @@ By receiving the $filter service in your custom filter, you will be able to use 
             };
         }]);
 
+## Custom Directives
+You can create a custom directive whenever the built-in directives don't meet your needs, and you want to create self-contained functionality that you can reuse in different applications.
+
+Directives are created using the Module.directive method that receives the number of the directive, and the factory function.
+In the simplest of cases, the factory function returns a worker function known as the Link function, which links the directive with the HTML in the document and the data in the scope.
+
+        .directive('unorderedList', [function() { <-- defines an `unordered-list` directive
+            return function (scope, element, attrs) {       <-- the link function
+                var data = scope[attrs['unorderedList']];
+                if (angular.isArray(data)) {
+                    var listElem = angular.element('<ul>');
+                    element.append(listElem);
+                    for (var i = 0; i < data.length; i++) {
+                        listElem.append(angular.element('<li>').text(data[i].name));
+                        console.log('Item: ' + data[i].name);
+                    }
+                }
+            };
+        }]);
+
+The link function receives three parameters:
+    . scope: the scope for the view in which the directive has been applied.
+    . element: the HTML element that the directive has been applied to
+    . attrs: the attributes of the HTML element
+
+To access data from the scope you can use:
+
+    var data = scope[attrs['unorderedList']];
+
+    which is linked to the view:
+        <div unordered-list="products"></div>
+
+In order to modify the DOM of the view you use something like:
+        var listElem = angular.element('<ul>');
+        element.append(listElem);
+        for (var i = 0; i < data.length; i++) {
+            listElem.append(angular.element('<li>').text(data[i].name));
+        }
+
+which builds the following HTML fragment:
+        <ul><li>Apples</li><li>Bananas</li><li>Pears</li></ul>
+
+The idea is that you create an element using angular.element('<ul>') and you add elements using the append method. Finally, you add the created element to the DOM using element.append().
+For example, to include a simple title for the list:
+        var listTitle = angular.element('<h3>');
+        listTitle.text('Unordered List of Products');
+        element.append(listTitle);
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -823,3 +871,5 @@ When you click on Child Controller #2's:
 045-filtering-collections: Illustrates how to use the built-in filters for collections including limitTo, filter and orderBy. It is also demonstrated filter chaining.
 
 046-custom-filters: Illustrate how to create a custom filter for single data values, collections and also how to programmatically leverage existing filters.
+
+047-custom-directives:
