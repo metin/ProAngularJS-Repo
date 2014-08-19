@@ -614,3 +614,4 @@ Note that when you use the required attribute, the example fails.
 
 038-communicating-controllers: Illustrates how to use events to communicate two controllers. The `$rootScope.$broadcast` method is used to notify that a certain piece of data has changed. Then, a controller can use the `$scope.$on` to subscribe to that particular event and read the event information.
 
+039-using-services-to-mediate-scope-events: The same example as 038- but using a service to mediate the scope events. By using this method, the controller does not have to receive the $rootScope, and only registers the event handler and uses the service to communicate that a piece of info has changed.
