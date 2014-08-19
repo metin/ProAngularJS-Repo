@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS Directives</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app-controllers.js"></script>
+</head>
+<body>
+    <div class="well well-lg" ng-controller="SimpleController as simpleCtrl">
+        <div class="form-group">
+            <label>Select a City</label>
+            <select ng-options="city for city in cities" ng-model="city"></select>
+        </div>
+
+        <p>The city is: {{city}}</p>
+        <p>The country is: {{getCountry(city) || 'Unknown'}}</p>
+    </div>
+</body>
+</html>

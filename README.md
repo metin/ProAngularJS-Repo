@@ -434,6 +434,13 @@ Additionally, AngularJS provides the following validation variables to control t
     . $invalid  : true if the contents of the element/form is invalid
     . $error    : provide details about the validation errors
 
+## Controllers and Scopes
+Controllers act as the link between the domain model and the view; they provide data and services to the view and define the behavior required to translate user action into changes into the model.
+
+Your application must have at least one controller.
+
+Controllers provide data and behavior to the view through scopes.
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -579,3 +586,8 @@ Note that when you use the required attribute, the example fails.
 033-form-textarea-elem-directives: Illustrate AngularJS directives that can be applied to textboxes.
 
 034-form-select-elem-directives: Illustrate AngularJS directives that can be applied to select elements.
+
+035-controllers-basics: Illustrates how to add basic behavior to an app using controllers.
+
+036-monolithic-controller:
+
