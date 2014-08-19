@@ -486,7 +486,53 @@ AngularJS provides three methods that let you register handler functions to resp
     . $watchCollection(object, handler) : registers a handler that will be notified when any of the properties of the specified object change.
 
 ## Filters
+Filters transform the data before it is processed by a directive and displayed in a view without modifying the original data in the scope.
+Filters can perform any kind of transformation, but typically they are used to present the same data in different ways, to sort the data and to filter out unwanted data.
 
+AngularJS provides two types of built-in filters:
+    . filters that operate on single values
+    . filters that operate on collections
+
+Filters can be chained together so that multiple filters operate in sequence on the same data.
+
+### Filtering Single Data Values
+    . currency  : format currency values
+    . Date      : format date values according to the format specifiers:
+                    . yyyy : four-year digit
+                    . yy   : two-year digit
+                    . MMMM : full month name (January)
+                    . MMM  : short representation of month name (Jan)
+                    . MM   : numeric month padded with zeros if needed (01, 02, .. 11, 12)
+                    . M    : numeric month without padding (1, 2, ..., 11, 12)
+                    . dd   : day of month padded with zeros
+                    . d    : day of month without padding
+                    . EEEE : day of the week full name (Monday)
+                    . EEE  : day of the week short name (Mon)
+                    . HH   : 24-hour with padding
+                    . H    : 24-hour without padding
+                    . hh   : 12-hour with padding
+                    . h    : 12-hour without padding
+                    . mm   : minutes with padding
+                    . m    : minutes without padding
+                    . ss   : seconds with padding
+                    . s    : seconds without padding
+                    . a    : marker for AM/PM
+                    . Z    : four-char representation of the timezone
+
+                    Additionally, you can (and should) use (for localization) shortcuts for formatting strings:
+                    . medium      : equivalent to MMM d, y h:mm:ss a
+                    . short       : equivalent to M/d/y h:mm a
+                    . fullDate    : equivalent to EEEE, MMMM d, y
+                    . longDate    : equivalent to MMMM d, y
+                    . mediumDate  : equivalent to MMM d, y
+                    . shortDate   : equivalent to M/d/yy
+                    . mediumTime  : equivalent to h:mm:ss a
+                    . shortTime   : equivalent to h:mm a
+
+    . JSON      : generates an object from a JSON string
+    . number    : formats a numeric value
+    . uppercase : generates an all uppercase string
+    . lowercase : generates an all lowercase string
 
 # Examples
 
@@ -692,3 +738,5 @@ When you click on Child Controller #2's:
     . Shift: all three data values are changed using child controller #2 behavior
 
 042-leveraging-multiple-controllers: Illustrates how to use scopeless controllers.
+
+043-filter-single-data-values: Illustrates how to use the built-in filters for single data values including currency, date, casing and JSON.
