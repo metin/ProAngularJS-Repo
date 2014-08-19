@@ -589,5 +589,9 @@ Note that when you use the required attribute, the example fails.
 
 035-controllers-basics: Illustrates how to add basic behavior to an app using controllers.
 
-036-monolithic-controller:
+036-monolithic-controller: Illustrates how to create a monolithic controller that is applied to the body element of the view and controls all the functionality of the application.
+
+037-reusing-controller: Illustrates how to reuse the same controller for two different parts of view, and as a consequence, you have two separate scopes. In this application, the `Use Billing` button does not work because the second scope does not see the first one.
+
+038-communicating-controllers:
 
