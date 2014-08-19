@@ -659,6 +659,12 @@ For example, to include a simple title for the list:
         listTitle.text('Unordered List of Products');
         element.append(listTitle);
 
+You can also receive expressions such as:
+    <div unordered-list="products" list-property="price | currency"></div>
+
+But you need to eval the expression in your directive implementation:
+    listElem.append(angular.element('<li>').text(scope.$eval(propertyExpression, data[i])));
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -875,3 +881,5 @@ When you click on Child Controller #2's:
 047-custom-directives: Illustrates how to create a custom directive unordered-list that appends a <ul> with the products in the scope.
 
 048-custom-directives-params: Illustrates how to pass additional parameters to the directive to control additional aspects, such as breaking the data dependency.
+
+049-custom-directives-eval: Illustrates how to evaluate parameter values as expressions so that filters can be used in our directive.
