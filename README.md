@@ -441,6 +441,25 @@ Your application must have at least one controller.
 
 Controllers provide data and behavior to the view through scopes.
 
+Each controller create its own scope, separate from other controller scopes. Scopes are organized in a hierarchy, in which $rootScope is the root of the tree.
+The $rootScope is available as a service for DI.
+
+### Communication between Controllers using Events
+All scopes define a number of methods that are used to send and receive events:
+    . $broadcast(evtName, argsObj) : sends an event from the current scope down to all child scopes. The argsObj is used to provide supplementary data with the event.
+
+    . $emit(evtName, argsObj) : sends an event from the current scope up to the root scope.
+
+    . $on(name, handler) : registers a handler function that is invoked when the event is received.
+
+For example, to communicate to all child scopes that a value has been updated:
+    $rootScope.$broadcast('zipCodeUpdated', {type: type, zipCode: zip});
+
+To register a handler for that event in a child scope:
+    $scope.$on('zipCodeUpdated', function(event, args) {
+                    $scope[args.type] = args.zipCode;
+                });
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -593,5 +612,5 @@ Note that when you use the required attribute, the example fails.
 
 037-reusing-controller: Illustrates how to reuse the same controller for two different parts of view, and as a consequence, you have two separate scopes. In this application, the `Use Billing` button does not work because the second scope does not see the first one.
 
-038-communicating-controllers:
+038-communicating-controllers: Illustrates how to use events to communicate two controllers. The `$rootScope.$broadcast` method is used to notify that a certain piece of data has changed. Then, a controller can use the `$scope.$on` to subscribe to that particular event and read the event information.
 
