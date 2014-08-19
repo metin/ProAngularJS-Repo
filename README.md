@@ -468,6 +468,14 @@ The ng-controller directive can be nested in the HTML document to create an effe
     . You can override and extend behavior in a child controller
     . Data modified in a child controller scope does not affect the parent scope.
     . Data modified in a child controller by behavior defined in the parent scope affects the parent scope.
+    . Because of prototype inheritance, if instead of defining a property on the scope, you define an object, you will prevent local variables creation associated with each of the child scopes:
+        $scope.dataValue = 'hello'; // This will create a local variable, and eventually will lead to desync
+                                    // between parent and child scope data
+
+        $scope.data = { dataValue : 'hello'}; // This will prevent desync, so that's the way to go.
+
+
+
 
 # Examples
 
@@ -655,3 +663,19 @@ As a summary:
 
 041-controller-inheritance-solved: This example illustrates how to fix the odd behavior of 040- where you have a parent controller with two child controllers that extend from it.
 The odd behavior consists in that if you type in a child textfield, and then click on the Reverse button the dataValues for the top level and other child controller are changed, but not the one that you have changed.
+
+Top Level Controller's:
+    . If you type in the text field all three data values are changed
+    . Reverse: all three data values are changed using top level controller behavior
+    . Case: all three data values are changed using top level controller behavior
+
+Child Controller #1's:
+    . If you type in the text field all three data values are changed
+    . Reverse: all three data values are changed using top level controller behavior
+    . Case: all three data values are changed using child controller #1 behavior
+
+When you click on Child Controller #2's:
+    . If you type in the text field all three data values are changed
+    . Reverse: all three data values are changed using top level controller behavior
+    . Case: all three data values are changed using child controller #2 behavior
+    . Shift: all three data values are changed using child controller #2 behavior
