@@ -564,6 +564,53 @@ Then automatically, filters will update its output to reflect the locale.
                 You can also use multiple predicates:
                     <tr ng-repeat="product in products | orderBy:[customSorter, 'price']">
 
+
+### Implementing Custom Filters for Single Data Values
+Example:
+    Implementation:
+        angular.module('exampleApp.Filters', [])
+            .filter('labelCase', function() {
+                return function(value, reverse) {
+                    if (angular.isString(value)) {
+                        var temp = reverse ? value.toUpperCase() : value.toLowerCase();
+                        return (reverse ? temp[0].toLowerCase() : temp[0].toUpperCase()) + temp.substr(1);
+                    }
+                };
+            });
+
+        Usage in the view:
+            <td>{{product.category | labelCase:true}}</td>
+
+### Implementing Custom Filters for Collections
+Example:
+    Implementation:
+        angular.module('exampleApp.Filters', [])
+            .filter('skip', function() {
+                return function(data, count) {
+                    if (angular.isArray(data) && angular.isNumber(count)) {
+                        if (count > data.length || count < 1) {
+                            return data;
+                        } else {
+                            return data.slice(count);
+                        }
+                    } else {
+                        return data;
+                    }
+                };
+            });
+
+    Usage in the view:
+        <tr ng-repeat="product in products | skip:2">
+
+### Using Filters programmatically
+By receiving the $filter service in your custom filter, you will be able to use built-in or custom filters programmatically from your custom filter:
+        .filter('take', ['$filter', function($filter) {
+            return function(data, skipCount, takeCount) {
+                var skippedData = $filter('skip')(data, skipCount);
+                return $filter('limitTo')(skippedData, takeCount);
+            };
+        }]);
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -774,3 +821,5 @@ When you click on Child Controller #2's:
 044-localization-filter-ouput: Illustrates how to apply automatic localization of single data value filters by including a localization file from angular-i18n into your project.
 
 045-filtering-collections: Illustrates how to use the built-in filters for collections including limitTo, filter and orderBy. It is also demonstrated filter chaining.
+
+046-custom-filters: Illustrate how to create a custom filter for single data values, collections and also how to programmatically leverage existing filters.
