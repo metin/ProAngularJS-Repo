@@ -544,6 +544,25 @@ and then reference the appropriate localization file in your index.html:
 Then automatically, filters will update its output to reflect the locale.
 
 ### Filtering Collections
+    . limitTo : restricts the number of items taken from an array of data objects. This is useful for pagination.
+                If you specify a positive value it will take the first items of the collection, if you specify a negative value, it will take the last items of the collection.
+                limitTo:limitVal
+                <tr ng-repeat="product in products | limitTo:limitVal">
+
+    . filter  : used to select objects from an array.
+                You can either use an object:
+                    <tr ng-repeat="product in products | filter:{category: 'Fish'}">
+                Or a function that must return true for the objects to be included:
+                    <tr ng-repeat="product in products | filter:isFishOrBeer">
+
+    . orderBy : sorts the objects in an array:
+                You can either use a property:
+                    <tr ng-repeat="product in products | orderBy:'price'">
+                    <tr ng-repeat="product in products | orderBy:'-price'">
+                or a sorting function that must return an object or value that will be used for comparison during sorting (lower values will come first):
+                    <tr ng-repeat="product in products | orderBy:customSorter">
+                You can also use multiple predicates:
+                    <tr ng-repeat="product in products | orderBy:[customSorter, 'price']">
 
 # Examples
 
@@ -752,4 +771,6 @@ When you click on Child Controller #2's:
 
 043-filter-single-data-values: Illustrates how to use the built-in filters for single data values including currency, date, casing and JSON.
 
-044-localization-filter-ouput:
+044-localization-filter-ouput: Illustrates how to apply automatic localization of single data value filters by including a localization file from angular-i18n into your project.
+
+045-filtering-collections: Illustrates how to use the built-in filters for collections including limitTo, filter and orderBy. It is also demonstrated filter chaining.
