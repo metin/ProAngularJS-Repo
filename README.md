@@ -474,7 +474,18 @@ The ng-controller directive can be nested in the HTML document to create an effe
 
         $scope.data = { dataValue : 'hello'}; // This will prevent desync, so that's the way to go.
 
+### Scope-less Controllers
 
+If scopes seem unnecessarily complex, and you don't need to communicate between controllers you can use scope-less controllers. These are controllers that provide data and behaviors to views directly as properties and methods of the controller.
+
+### Integrating with another JavaScript framework
+AngularJS provides three methods that let you register handler functions to respond to changes in the scope and inject changes in the scope from outside AngularJS.
+
+    . $apply(expression) : applies a change to the scope
+    . $watch(expression, handler) : Registers a handler that will be notified when the value referred to by the expression changes.
+    . $watchCollection(object, handler) : registers a handler that will be notified when any of the properties of the specified object change.
+
+## Filters
 
 
 # Examples
@@ -679,3 +690,5 @@ When you click on Child Controller #2's:
     . Reverse: all three data values are changed using top level controller behavior
     . Case: all three data values are changed using child controller #2 behavior
     . Shift: all three data values are changed using child controller #2 behavior
+
+042-leveraging-multiple-controllers: Illustrates how to use scopeless controllers.
