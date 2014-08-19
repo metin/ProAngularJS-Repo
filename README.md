@@ -444,6 +444,7 @@ Controllers provide data and behavior to the view through scopes.
 Each controller create its own scope, separate from other controller scopes. Scopes are organized in a hierarchy, in which $rootScope is the root of the tree.
 The $rootScope is available as a service for DI.
 
+
 ### Communication between Controllers using Events
 All scopes define a number of methods that are used to send and receive events:
     . $broadcast(evtName, argsObj) : sends an event from the current scope down to all child scopes. The argsObj is used to provide supplementary data with the event.
@@ -459,6 +460,14 @@ To register a handler for that event in a child scope:
     $scope.$on('zipCodeUpdated', function(event, args) {
                     $scope[args.type] = args.zipCode;
                 });
+
+### Controller Inheritance
+The ng-controller directive can be nested in the HTML document to create an effect known as controller inheritance. This is a feature that aims to reduce code duplication by letting you define common functionality in a parent controller and use it in one or more child controllers.
+
+    . Behavior is inherited from parent to child controller
+    . You can override and extend behavior in a child controller
+    . Data modified in a child controller scope does not affect the parent scope.
+    . Data modified in a child controller by behavior defined in the parent scope affects the parent scope.
 
 # Examples
 
@@ -615,3 +624,34 @@ Note that when you use the required attribute, the example fails.
 038-communicating-controllers: Illustrates how to use events to communicate two controllers. The `$rootScope.$broadcast` method is used to notify that a certain piece of data has changed. Then, a controller can use the `$scope.$on` to subscribe to that particular event and read the event information.
 
 039-using-services-to-mediate-scope-events: The same example as 038- but using a service to mediate the scope events. By using this method, the controller does not have to receive the $rootScope, and only registers the event handler and uses the service to communicate that a piece of info has changed.
+
+040-controller-inheritance: Illustrate the intrincacies of controller inheritance by creating an example with a top level controller that provides two functions:
+    . reverse()
+    . case()
+
+Then two child controllers are created, both of them inherit the reverse() method, and the first one overrides the case() method and the second one overrides the case() method and provides a new one called shift().
+
+Top Level Controller's:
+    . If you type in the text field all three data values are changed
+    . Reverse: all three data values are changed using top level controller behavior
+    . Case: all three data values are changed using top level controller behavior
+
+Child Controller #1's:
+    . If you type in the text field only this value is changed. If you then click on revers, top level and child controller dataValues are changed, but not the dataValue for child controller #1.
+    . Reverse: all three data values are changed using top level controller behavior
+    . Case: Only the child controller data is modified
+
+When you click on Child Controller #2's:
+    . If you type in the text field only this value is changed. If you then click on revers, top level and child controller dataValues are changed, but not the dataValue for child controller #1.
+    . Reverse: all three data values are changed using top level controller behavior
+    . Case: Only the child controller data is modified
+    . Shift: Only the child controller data is modified
+
+As a summary:
+    . Behavior is inherited from parent to child controller
+    . You can override and extend behavior in a child controller
+    . Data modified in a child controller scope does not affect the parent scope.
+    . Data modified in a child controller by behavior defined in the parent scope affects the parent scope.
+
+041-controller-inheritance-solved: This example illustrates how to fix the odd behavior of 040- where you have a parent controller with two child controllers that extend from it.
+The odd behavior consists in that if you type in a child textfield, and then click on the Reverse button the dataValues for the top level and other child controller are changed, but not the one that you have changed.
