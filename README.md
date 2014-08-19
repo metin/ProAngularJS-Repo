@@ -870,6 +870,8 @@ When you click on Child Controller #2's:
 
 045-filtering-collections: Illustrates how to use the built-in filters for collections including limitTo, filter and orderBy. It is also demonstrated filter chaining.
 
-046-custom-filters: Illustrate how to create a custom filter for single data values, collections and also how to programmatically leverage existing filters.
+046-custom-filters: Illustrates how to create a custom filter for single data values, collections and also how to programmatically leverage existing filters.
 
-047-custom-directives:
+047-custom-directives: Illustrates how to create a custom directive unordered-list that appends a <ul> with the products in the scope.
+
+048-custom-directives-params: Illustrates how to pass additional parameters to the directive to control additional aspects, such as breaking the data dependency.
