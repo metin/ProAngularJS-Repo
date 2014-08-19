@@ -534,6 +534,17 @@ Filters can be chained together so that multiple filters operate in sequence on 
     . uppercase : generates an all uppercase string
     . lowercase : generates an all lowercase string
 
+### Localization: Localizing filter output
+To localize filter output you must install the i18n component:
+    `bower install angular-i18n --save`
+
+and then reference the appropriate localization file in your index.html:
+    <script type="text/javascript" src="bower_components/angular-i18n/angular-locale_es-es.js"></script>
+
+Then automatically, filters will update its output to reflect the locale.
+
+### Filtering Collections
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -740,3 +751,5 @@ When you click on Child Controller #2's:
 042-leveraging-multiple-controllers: Illustrates how to use scopeless controllers.
 
 043-filter-single-data-values: Illustrates how to use the built-in filters for single data values including currency, date, casing and JSON.
+
+044-localization-filter-ouput:
