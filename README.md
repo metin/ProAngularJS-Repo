@@ -929,3 +929,6 @@ When you click on Child Controller #2's:
 055-using-directive-external-template-functions: Illustrates how to use a function to return the templateUrl that the directive will use.
 
 056-managing-directive-scopes: Demonstrates how all the instances of a directive receives the same scope by default, so that data elements are all synchronized.
+
+057-managing-directive-scopes-multiple-controllers: Demonstrates how to solve the problem associated with 056-, by creating one controller for each instance of the directive.
+
