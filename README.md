@@ -665,6 +665,31 @@ You can also receive expressions such as:
 But you need to eval the expression in your directive implementation:
     listElem.append(angular.element('<li>').text(scope.$eval(propertyExpression, data[i])));
 
+Strictly speaking, when defining a directive you should return a definition object. This lets you fine tune how you can apply the directive:
+        .directive('unorderedList', [function() {
+            return {
+                link: function(scope, element, attrs) {
+                    ...
+                },
+                restrict: 'EACM' // allows the directiy to be applied as Element, Attribite, Class and Comment
+            };
+
+This definition object provides the following properties:
+    . compile : specifies a compile function (when you modify the DOM)
+    . controller: creates a controller for the directive
+    . link: specifies the link function (perform tasks such as creating watchers and setting up event handlers)
+    . replace: specifies whether the contents of the template should replace the element that the directive has been applied to.
+    . require: declares a dependency on a controller.
+    . restrict: species where the directive can be applied
+        . E: element
+        . A: attribute
+        . C: class
+        . M: comments
+    . scope: creates a new scope on an isolated scope for the directive
+    . template: specifies a template that will be inserted into the HTML document.
+    . templateUrl: specifies an external template that will be inserted into the HTML document.
+    . transclude: specifies whether the directive will be used to wrap arbitrary content.
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -885,3 +910,5 @@ When you click on Child Controller #2's:
 049-custom-directives-eval: Illustrates how to evaluate parameter values as expressions so that filters can be used in our directive.
 
 050-handling-data-changes: Demonstrates how to create a watcher function to update the directive contents when the data in the scope changes.
+
+051-complex-directives: Illustrates how to use the definition object when implementing a directive. The directive defines a link function that creates a list, and the directive can be applied as an element, attribute, class or comment.
