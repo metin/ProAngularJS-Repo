@@ -918,3 +918,5 @@ When you click on Child Controller #2's:
 053-using-directive-templates-function: Illustrates how to use a function as the template property. This function extracts the contents of the template from a script block in index.html.
 
 054-using-directive-external-template: Illustrates how to use the templateUrl to externalize the HTML contents associated with a directive.
+
+055-using-directive-external-template-functions: Illustrates how to use a function to return the templateUrl that the directive will use.
