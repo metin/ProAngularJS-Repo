@@ -715,7 +715,7 @@ The directive definition object provides a compile property where you can implem
 ### Directive Controllers
 Directives can creat controllers, which allows for the creation of more complex components.
 
-
+** Chapters 16 and 17 have been read and most of the examples have been included, but they require a second read to fully understand the matter. **
 
 # Examples
 
@@ -967,3 +967,5 @@ When you click on Child Controller #2's:
 064-directive-compile: This example contains a directive called simpleRepeater that uses transclusion to repeat a set of elements for each object in an array
 
 065-controller-directives: Illustrate how to create a directive that depends on other directive which features a controller. In the example, there is list of products with text input that accept quantitites. The directive is used to display the elements as a table and the final quantity is computed.
+
+066-custom-form-elements: Illustrate how to use directives to create a complex component (tri-button) that displays three options Yes, No, Not Sure. The selected option can be linked to the model and also a custom validation and formatter are implemented.
