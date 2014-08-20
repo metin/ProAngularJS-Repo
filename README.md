@@ -883,3 +883,5 @@ When you click on Child Controller #2's:
 048-custom-directives-params: Illustrates how to pass additional parameters to the directive to control additional aspects, such as breaking the data dependency.
 
 049-custom-directives-eval: Illustrates how to evaluate parameter values as expressions so that filters can be used in our directive.
+
+050-handling-data-changes: Demonstrates how to create a watcher function to update the directive contents when the data in the scope changes.
