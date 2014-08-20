@@ -912,3 +912,7 @@ When you click on Child Controller #2's:
 050-handling-data-changes: Demonstrates how to create a watcher function to update the directive contents when the data in the scope changes.
 
 051-complex-directives: Illustrates how to use the definition object when implementing a directive. The directive defines a link function that creates a list, and the directive can be applied as an element, attribute, class or comment.
+
+052-using-directive-templates: Illustrates how to use the template property of the directive definition object when creating a directive. This simplifies enormously the intrincacies of the link function, as it nows only has to extract the data and put it into the scope.
+
+053-using-directive-templates-function:
