@@ -695,7 +695,7 @@ This definition object provides the following properties:
 By default, the link function is passed the scope of the controller that manages the view that contains the element to which the directive has been applied. In essence, this means that all instances of the directive will be bound to the same set of data, and sometimes this synchronization is not desirable (sometimes it is).
 There are two possible solutions:
     . Add an additional controller for each directive instance you don't want to be synchronized. This may seem inelegant but sometimes is the only way (if you don't control the directive source, for example.)
-    .
+    . Set the scope property to true, so that each directive instance is given a child scope in the scope hierarchy. In this case, the same rules of the scope hierarchy inheritance apply.
 
 # Examples
 
@@ -932,3 +932,4 @@ When you click on Child Controller #2's:
 
 057-managing-directive-scopes-multiple-controllers: Demonstrates how to solve the problem associated with 056-, by creating one controller for each instance of the directive.
 
+058-managing-directive-scopes-scope-prop:
