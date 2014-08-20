@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS Example</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app-controllers.js"></script>
+    <script type="text/javascript" src="app-directives.js"></script>
+    <script type="text/template" id="listTemplate">
+        <h3>{{listTitleText}}</h3>
+        <ul>
+            <li ng-repeat="item in data">{{item.price | currency}}</li>
+        </ul>
+    </script>
+</head>
+<body ng-controller="DefaultController">
+    <div class="panel panel-default" ng-cloak>
+        <div class="panel-heading">
+            <h3 class="panel-title">Products</h3>
+        </div>
+        <div class="panel-body">
+            <!-- Applying unordered-list directive as an attribute -->
+            <div unordered-list="products"
+                list-title="Price List"
+                list-property="price | currency">
+                This is where the list will go.
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
