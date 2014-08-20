@@ -690,6 +690,13 @@ This definition object provides the following properties:
     . templateUrl: specifies an external template that will be inserted into the HTML document.
     . transclude: specifies whether the directive will be used to wrap arbitrary content.
 
+### Managing Directive Scopes
+
+By default, the link function is passed the scope of the controller that manages the view that contains the element to which the directive has been applied. In essence, this means that all instances of the directive will be bound to the same set of data, and sometimes this synchronization is not desirable (sometimes it is).
+There are two possible solutions:
+    . Add an additional controller for each directive instance you don't want to be synchronized. This may seem inelegant but sometimes is the only way (if you don't control the directive source, for example.)
+    .
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -920,3 +927,5 @@ When you click on Child Controller #2's:
 054-using-directive-external-template: Illustrates how to use the templateUrl to externalize the HTML contents associated with a directive.
 
 055-using-directive-external-template-functions: Illustrates how to use a function to return the templateUrl that the directive will use.
+
+056-managing-directive-scopes: Demonstrates how all the instances of a directive receives the same scope by default, so that data elements are all synchronized.
