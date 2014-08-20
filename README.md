@@ -697,6 +697,15 @@ There are two possible solutions:
     . Add an additional controller for each directive instance you don't want to be synchronized. This may seem inelegant but sometimes is the only way (if you don't control the directive source, for example.)
     . Set the scope property to true, so that each directive instance is given a child scope in the scope hierarchy. In this case, the same rules of the scope hierarchy inheritance apply.
 
+Sometimes, you will want the directive to have a completely separated scope, so that it does not inherit from any other scope. In the case that you'd want to interact with the controller scope, you're given the syntax:
+        .directive('scopeDemo', [function() {
+            return {
+                template: '<div class="panel-body"><p> Data Value: {{local}}</p>',
+                scope: {
+                    local: '@nameprop'
+                }
+            };
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -932,4 +941,6 @@ When you click on Child Controller #2's:
 
 057-managing-directive-scopes-multiple-controllers: Demonstrates how to solve the problem associated with 056-, by creating one controller for each instance of the directive.
 
-058-managing-directive-scopes-scope-prop:
+058-managing-directive-scopes-scope-prop: Demonstrates how to solve the problem associated with 056-, by setting the scope property to true so that each instance of the directive is given a separate scope following the rules of the scope hierarchy.
+
+059-isolated-scopes-one-way-binding: Illustrates how to create a completely isolated scope for each instance of the directive, but also how you can interact with the owning controller scope establishing one-way databindings with the controller scope.
