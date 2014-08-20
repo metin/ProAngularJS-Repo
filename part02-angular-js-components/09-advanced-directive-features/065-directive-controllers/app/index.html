@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS Example</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app-controllers.js"></script>
+    <script type="text/javascript" src="app-directives.js"></script>
+</head>
+<body ng-controller="DefaultController">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class="table table-striped"
+                product-table="totalValue" product-data="products" ng-transclude>
+                    <tr><th>Name</th><th>Quantity</th></tr>
+                    <tr ng-repeat="item in products" product-item></tr>
+                    <tr><th>Total:</th><td>{{totalValue}}</td></tr>
+                    <tr reset-totals product-data="products" property-name="quantity"></tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

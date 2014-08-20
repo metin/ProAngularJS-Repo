@@ -712,6 +712,11 @@ The term transclusion means to insert one part of a document into another by ref
 ### Compile Function
 The directive definition object provides a compile property where you can implement any kind of DOM manipulation you require, so that the link function can focus on data related issues.
 
+### Directive Controllers
+Directives can creat controllers, which allows for the creation of more complex components.
+
+
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -961,4 +966,4 @@ When you click on Child Controller #2's:
 
 064-directive-compile: This example contains a directive called simpleRepeater that uses transclusion to repeat a set of elements for each object in an array
 
-065-controller-directives:
+065-controller-directives: Illustrate how to create a directive that depends on other directive which features a controller. In the example, there is list of products with text input that accept quantitites. The directive is used to display the elements as a table and the final quantity is computed.
