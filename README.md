@@ -944,3 +944,10 @@ When you click on Child Controller #2's:
 058-managing-directive-scopes-scope-prop: Demonstrates how to solve the problem associated with 056-, by setting the scope property to true so that each instance of the directive is given a separate scope following the rules of the scope hierarchy.
 
 059-isolated-scopes-one-way-binding: Illustrates how to create a completely isolated scope for each instance of the directive, but also how you can interact with the owning controller scope establishing one-way databindings with the controller scope.
+
+060-isolated-scopes-two-way-binding: Illustrates how to create a completely isolated scope for each instance of the directive, but also how you can interact with the owning controller scope establishing two-way databindings with the controller scope.
+
+061-isolated-scopes-evaluating-expr: Illustrates how to perform a binding with a function defined in the controller.
+
+062-isolated-scopes-evaluating-expr-scope-var: Illustrates how to perform a binding with a function defined in the controller, that also receives data defined in the isolated scope.
+
