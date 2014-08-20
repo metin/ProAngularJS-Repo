@@ -706,6 +706,10 @@ Sometimes, you will want the directive to have a completely separated scope, so 
                 }
             };
 
+### Transclusion
+The term transclusion means to insert one part of a document into another by reference. This is useful when you are creating a directive that is a wrapper around arbitrary content.
+
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -951,3 +955,4 @@ When you click on Child Controller #2's:
 
 062-isolated-scopes-evaluating-expr-scope-var: Illustrates how to perform a binding with a function defined in the controller, that also receives data defined in the isolated scope.
 
+063-directive-transclusion: Illustrates how to use transclusion with a directive. In the example, it is created a directive that wraps content in a bootstrap panel.
