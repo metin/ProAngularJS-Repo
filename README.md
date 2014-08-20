@@ -916,3 +916,5 @@ When you click on Child Controller #2's:
 052-using-directive-templates: Illustrates how to use the template property of the directive definition object when creating a directive. This simplifies enormously the intrincacies of the link function, as it nows only has to extract the data and put it into the scope.
 
 053-using-directive-templates-function: Illustrates how to use a function as the template property. This function extracts the contents of the template from a script block in index.html.
+
+054-using-directive-external-template: Illustrates how to use the templateUrl to externalize the HTML contents associated with a directive.
