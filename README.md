@@ -709,6 +709,8 @@ Sometimes, you will want the directive to have a completely separated scope, so 
 ### Transclusion
 The term transclusion means to insert one part of a document into another by reference. This is useful when you are creating a directive that is a wrapper around arbitrary content.
 
+### Compile Function
+The directive definition object provides a compile property where you can implement any kind of DOM manipulation you require, so that the link function can focus on data related issues.
 
 # Examples
 
@@ -956,3 +958,7 @@ When you click on Child Controller #2's:
 062-isolated-scopes-evaluating-expr-scope-var: Illustrates how to perform a binding with a function defined in the controller, that also receives data defined in the isolated scope.
 
 063-directive-transclusion: Illustrates how to use transclusion with a directive. In the example, it is created a directive that wraps content in a bootstrap panel.
+
+064-directive-compile: This example contains a directive called simpleRepeater that uses transclusion to repeat a set of elements for each object in an array
+
+065-controller-directives:
