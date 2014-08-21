@@ -1099,3 +1099,5 @@ This example does not use services, but serves as a starting point for the rest 
 071-services-creation-provider-config: Illustrates how to leverage the Module.provider method to create a configurable service.
 
 072-services-window-object: Illustrates how to use the $window service to access the DOM window object that for example gives you access to the alert() method.
+
+073-services-document-object: Illustrates how to use the $document object to access the DOM document and register an event handler for a button.
