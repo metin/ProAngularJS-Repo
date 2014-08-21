@@ -727,7 +727,8 @@ Services are typically used to implement cross-cutting concerns such as logging,
 The AngularJS module defines three methods for defining services: factory, service and provider. The result of using these methods is the same - a service object that can be used thorughout the AngularJS application. The differences strive on the way the service object is created and managed.
 
 ### Creating Services using the factory Method
-The Module.factory method creates a service object but when AngularJS needs to satisfy a dependency for this service it uses the object returned by the factory function.
+The Module.factory method creates a service object.
+When AngularJS needs to satisfy a dependency for this service it uses the object returned by the factory function.
 
     angular.module('exampleApp.Services', [])
         .factory('logService', function() {
@@ -740,9 +741,33 @@ The Module.factory method creates a service object but when AngularJS needs to s
         });
 
 
+** NOTE **
+In general practice, the factory and service method should be considered equivalent.
+
+
 
 ### Creating Services using the service Method
-The Module.service method also creates a service object but when AngularJS needs to satisfy a dependency for this service it uses the object returned by the factory function as a constructor and then uses `new` to create the service object.
+The Module.service method also creates a service object.
+When AngularJS needs to satisfy a dependency for this service it uses the object returned by the factory function as a constructor and then uses `new` to create the service object.
+
+    function BaseLogger() {
+        this.messageCount = 0;
+    }
+
+    BaseLogger.prototype.log = function(msg) {
+        console.log(this.msgType + ':' + (this.messageCount++) + ': ' + msg);
+    };
+
+    function DebugLogger() {
+    }
+    DebugLogger.prototype = new BaseLogger();
+    DebugLogger.prototype.msgType = 'DEBUG';
+
+    angular.module('exampleApp.Services', [])
+        .service('logService', DebugLogger);
+
+This can be used to leverage prototype inheritance in some cases.
+
 
 # Examples
 
@@ -1002,4 +1027,4 @@ This example does not use services, but serves as a starting point for the rest 
 
 068-services-factory: Illustrates how to create a service using the Module.factory method, which directly uses the factory function when a dependency for that service is found.
 
-069-services-service:
+069-services-service: Illustrates how to create a service using the Module.service method, which uses the object returned by the factory function as a constructor, and uses new to create that object. This lets you leverage prototype inheritance.
