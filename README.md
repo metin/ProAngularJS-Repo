@@ -951,6 +951,12 @@ AngularJS provides some services that are used to process content into functions
 
 These services are typically used on advanced directives when you get into problems that require precise management of templates.
 
+Interpolate is configurable so that you can use a delimiter different from `{{}}` for the inline interpolation. Note that if you change the interpolation character, you will have to use it also in the HTML
+        <div>
+            Price: !!dataValue!!<br>
+            Result: <span eval-expression amount="dataValue" tax="21"></span>
+        </div>
+
 
 # Examples
 
@@ -1249,3 +1255,7 @@ This example does not use services, but serves as a starting point for the rest 
 087-services-parse: Illustrate how to use the $parse service to dynamically parse expressions that a user types in a text field.
 
 088-services-parse-advanced: Illustrates a more sensible use of $parse that consists in reading two attributes from a directive and parsing the result back into the DOM after having applied programmatically an expression. In particular in this example, it is calculated a price + tax.
+
+089-services-interpolate: Illustrates the use of $interpolate to achieve the same results as 088-.
+
+090-services-interpolate-no-moustaches: Illustrates how to change the interpolation characters so that {{}} are no longer used to identify inline binding expressions.
