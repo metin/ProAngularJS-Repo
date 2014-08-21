@@ -1002,6 +1002,14 @@ The methods defined by the $http service all accept an optional argument of an o
     . withCredentials : when set to true, the withCredentials option on the underlying browser request object is enabled, which includes authentication cookies in the request.
     . xsrfHeaderNamexsrfCookieName: to set the name of the cookie when server demands XSRF token.
 
+It is also possible to define the default settings for Ajax requests using the $httpProvider:
+    . defaults.headers.common : defines the default headers used for all requests
+    . defaults.headers.post : defines the headers used for POST requests
+    . defaults.headers.put : defines the headers used for PUT requests
+    . defaults.transformResponse : An array of transform functions to be applied to all responses
+    . defaults.transformRequest : An array of transform functions to be applied to all requests
+    . interceptors : An array of interceptor factory functions
+    . withCredentials : Sets the withCredentials option for all requests. This property is used to address cross-origin requests that require authentication.
 
 # Examples
 
@@ -1312,3 +1320,5 @@ This example does not use services, but serves as a starting point for the rest 
 093-services-http-xml: Illustrates how to use the $http service to get an XML document. In this case, you are responsible for the parsing of the XML document yourself.
 
 094-services-http-config-transform-response: Illustrate how to use the transformResponse so that the XML parsing occurs automatically.
+
+095-services-http-config-transform-request: Illustrate how to use the transformRequest to implement an XML serializer of a JavaScript object using jqLite.
