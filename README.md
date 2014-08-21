@@ -1192,3 +1192,9 @@ This example does not use services, but serves as a starting point for the rest 
 078-services-anchorscroll-disable: demonstrates how to disable the automatic scrolling when $location.hash is invoked, and how to force scrolling to a given anchor calling the service.
 
 079-services-logging: demonstrates how to use the $log service, which is a wrapper around the console object.
+
+080-services-exceptionhandler-default: Illustrates the default behavior of the $exceptionhandler service, which calls the $log.error method.
+
+081-services-exceptionhandler: Illustrates how to invoke the $exceptionhandler programmatically.
+
+082-services-exceptionhandler-override: Illustrates how to create your own exception handler that overrides the one provided by AngularJS.
