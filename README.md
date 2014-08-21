@@ -1310,3 +1310,5 @@ This example does not use services, but serves as a starting point for the rest 
 092-services-http: Illustrates how to use the $http service to get a JSON document.
 
 093-services-http-xml: Illustrates how to use the $http service to get an XML document. In this case, you are responsible for the parsing of the XML document yourself.
+
+094-services-http-config-transform-response: Illustrate how to use the transformResponse so that the XML parsing occurs automatically.
