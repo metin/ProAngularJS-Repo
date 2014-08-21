@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS Example</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app-controllers.js"></script>
+    <script type="text/javascript" src="app-directives.js"></script>
+</head>
+<body ng-controller="DefaultController">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Type a JavaScript expression in the box below and it will be parsed dynamically.<br>
+            You can even reference properties in the scope such as <code>price</code>.<br><br>
+            <b>Examples:</b><br>
+                1 + 2<br>
+                price<br>
+                price + 10<br>
+                price | currency:'€'<br>
+        </div>
+        <div class="panel-body">
+            <input class="form-control" ng-model="expr"></p>
+        </div>
+        <div class="panel-body">
+            Result: <span eval-expression="expr"></span>
+        </div>
+    </div>
+</body>
+</html>

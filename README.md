@@ -1245,3 +1245,7 @@ This example does not use services, but serves as a starting point for the rest 
 085-services-security-sanitize: Illustrates how to use the $sanitize service to programmatically clean the values to be sent to the backend.
 
 086-services-security-sce-disable: Illustrates how to disable $sce so that everthing is displayed as received.
+
+087-services-parse: Illustrate how to use the $parse service to dynamically parse expressions that a user types in a text field.
+
+088-services-parse-advanced: Illustrates a more sensible use of $parse that consists in reading two attributes from a directive and parsing the result back into the DOM after having applied programmatically an expression. In particular in this example, it is calculated a price + tax.
