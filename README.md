@@ -959,6 +959,49 @@ Interpolate is configurable so that you can use a delimiter different from `{{}}
 
 ## Services for AJAX and Promises
 
+### Making Ajax requests using $http service
+The $http service is used to make and process Ajax requests, which are standard HTTP requests that are performed asynchronously.
+
+The following methods are provided by the $http service:
+    . get(url, config)
+    . post(url, data, config)
+    . delete(url, config)
+    . put(url, data, config)
+    . head(url, config)
+    . jsonp(url, config) : Performs a GET request to obtain a fragment of JavaScript code that is then executed. JSONP, which stands for JSON with Padding is a way of working around the limitation that browsers apply to where JavaScript code can be loaded from. As a consequence, it is extremely dangerous to use it.
+
+As a rule of thumb:
+    . GET should be used for all read-only information retrieval. GET requests are addressable, all the information is contained in the URL, so it's possible to bookmark and link to these addresses.
+    . POST should be used for any operation that changes the application state.
+
+In Ajax, the request is performed asynchronously, i.e. it is performed in the background and you have the chance of being notified when a response from the server is received.
+
+AngularJS uses a JavaScript pattern known as a promise to represent the result from an async operation. A promise is an object that defines methods that you can use to register functions that will be invoked when the operation is complete.
+The promise object returned by the $http service offers the following methods:
+    . success(fn) : invokes the specified function when the HTTP request has sucessfully completed.
+    . error(fn) : invokes the specified function when the request could not be successfully completed.
+    . then(succesFn, errorFn) : registers the success and error functions
+
+The handler functions you register will receive the following parameters:
+    . data : the response body
+    . status : the HTTP status code of the response
+    . headers : the header getter function
+    . config : the configuration object that was used to generate the request
+
+AngularJS automatically processes JSON data so you can simply assign the value of the response body to scope data in order to use it. If you receive any other kind of content, you're responsible for the parsing of the document and the generation of the JavaScript associated object or collection of objects (see 094-).
+
+The methods defined by the $http service all accept an optional argument of an object containing configuration settings, so that you can adjust way the requests are made when needed:
+    . data : sets the data sent to the server. If you set this to an object, AngularJS will serialize it to the JSON format.
+    . headers : set the request headers.
+    . method : sets the HTTP method to be used in the request
+    . params : used to set the URL parameters as an object whose property names and values correspond to the parameters you want to include.
+    . timeout : the number of millis before the request expires.
+    . transformRequest : used to manipulate the request before it is sent to the server
+    . transformResponse : used to manipulate the response when it arrives from the server.
+    . url : sets the url for the request
+    . withCredentials : when set to true, the withCredentials option on the underlying browser request object is enabled, which includes authentication cookies in the request.
+    . xsrfHeaderNamexsrfCookieName: to set the name of the cookie when server demands XSRF token.
+
 
 # Examples
 
@@ -1263,3 +1306,7 @@ This example does not use services, but serves as a starting point for the rest 
 090-services-interpolate-no-moustaches: Illustrates how to change the interpolation characters so that {{}} are no longer used to identify inline binding expressions.
 
 091-services-compile: Illustrates how to use $compile service to generate content dynamically in a directive.
+
+092-services-http: Illustrates how to use the $http service to get a JSON document.
+
+093-services-http-xml: Illustrates how to use the $http service to get an XML document. In this case, you are responsible for the parsing of the XML document yourself.
