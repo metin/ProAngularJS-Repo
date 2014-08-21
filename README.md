@@ -1011,6 +1011,29 @@ It is also possible to define the default settings for Ajax requests using the $
     . interceptors : An array of interceptor factory functions
     . withCredentials : Sets the withCredentials option for all requests. This property is used to address cross-origin requests that require authentication.
 
+#### Interceptors
+The $httpProvider.interceptors is an array into which you insert factory functions that return object with properties:
+    . request : the interceptor function will be called before the request is made and is passed the configuration object for the $http service.
+    . requestError : the interceptor function will be called when the previous request interceptor throws an error.
+    . response: the interceptor function is called when the response is received and is passed the response object.
+    . responseError : the interceptor function is called when the previous response interceptor throws an error.
+
+    angular.module('exampleApp', ['exampleApp.Controllers'])
+        .config(['$httpProvider', function($httpProvider) {
+            $httpProvider.interceptors.push(function($log) {
+                return {
+                    request: function(config) {
+                        config.url = 'productData.json';
+                        return config;
+                    },
+                    response: function(response) {
+                        $log.info('response length: ' + response.data.length);
+                        return response;
+                    }
+                };
+            });
+        }]);
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -1319,6 +1342,10 @@ This example does not use services, but serves as a starting point for the rest 
 
 093-services-http-xml: Illustrates how to use the $http service to get an XML document. In this case, you are responsible for the parsing of the XML document yourself.
 
-094-services-http-config-transform-response: Illustrate how to use the transformResponse so that the XML parsing occurs automatically.
+094-services-http-config-transform-response: Illustrates how to use the transformResponse so that the XML parsing occurs automatically.
 
-095-services-http-config-transform-request: Illustrate how to use the transformRequest to implement an XML serializer of a JavaScript object using jqLite.
+095-services-http-config-transform-request: Illustrates how to use the transformRequest to implement an XML serializer of a JavaScript object using jqLite.
+
+096-services-http-global-config: Illustrates how to perform global configuration of the $http service using the $httpProvider.
+
+097-services-http-global-interceptors: Illustrate how to use the $httpProvider to register an interceptor that will act on the requests and responses.
