@@ -884,6 +884,29 @@ As it is a relatively new feature, it is advisable to check if that feature is a
         $locationProvider.html5Mode(true);
     }
 
+#### The $anchorScroll function to scroll to the $location Hash
+The $anchorScroll service scrolls the browser window to display the element whose id corresponds to the value returned by the $location.hash method.
+
+This is extremely useful for long documents.
+
+To use anchorScroll service you just have to declare the dependency, and $location.hash will automatically detect that dependency and perform the scrolling automatically.
+
+        .controller('DefaultController', ['$scope', '$location', '$anchorScroll', function($scope, $location, $anchorScroll) {
+            $scope.itemCount = 250;
+            $scope.items = [];
+
+            for (var i = 0; i < $scope.itemCount; i++) {
+                $scope.items[i] = 'Item ' + i;
+            }
+
+            $scope.show = function(id) {
+                $location.hash(id);
+            };
+        }]);
+
+This default behavior can be disabled by configuring the anchorScrollProvider and calling:
+$anchorScrollProvider.disableAutoScrolling(). If you do so, you will be responsible for calling $anchorScroll() whenever you want to jump.
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -1155,3 +1178,9 @@ This example does not use services, but serves as a starting point for the rest 
 074-services-interval-timeout: Illustrates how to use the $interval service to display the current time to the second on the page.
 
 075-services-location: Illustrates how to use the $location service to set and get the URL components.
+
+076-services-location-murls: demonstrates how to enable the HTML5 History API in the locationProvider so that the `#` is no longer needed to prevent page refresh.
+
+077-services-anchorscroll: demonstrates how to use the $anchorScroll service to automatically scroll to a given anchor when using $location.hash() method.
+
+078-services-anchorscroll-disable: demonstrates how to disable the automatic scrolling when $location.hash is invoked, and how to force scrolling to a given anchor calling the service.
