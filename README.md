@@ -822,6 +822,17 @@ The advantages of using the provider strives in that you can add functionality t
             };
         }]);
 
+### Services: DOM API Global Objects
+AngularJS provides the following services that expose DOM API features:
+    . $anchorScroll : scrolls the browser window to a specified anchor
+    . $document : provides a jqLite object that contains the window.document object
+    . $interval : provides an enhanced wrapper around window.setInterval function
+    . $location : provides access to given the URL
+    . $log : provides a wrapper around the console object
+    . $timeout : provides an enhanced wrapper around window.setITimeout function
+    . $window : provides a reference to the DOM window object
+
+
 
 # Examples
 
@@ -1086,3 +1097,5 @@ This example does not use services, but serves as a starting point for the rest 
 070-services-creation-provider: Illustrates how to create a service using the Module.provider method, which uses the $get method on the object returned by the factory function to create the service. See 071- to see an example of how to leverage this to provide more functionality in the service.
 
 071-services-creation-provider-config: Illustrates how to leverage the Module.provider method to create a configurable service.
+
+072-services-window-object: Illustrates how to use the $window service to access the DOM window object that for example gives you access to the alert() method.
