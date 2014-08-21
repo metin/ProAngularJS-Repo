@@ -913,7 +913,7 @@ AngularJS provide the $log service which is a wrapper around the console object.
 ### Exceptions
 AngularJS uses the $exceptionHandler service to handle any exceptions that arise during the execution of an application and that are not caught using JavaScript's try-catch mechanism. The default implementation calls the error method defined by the $log service.
 
-### Dangerous Data
+### XSS Security: Disabling Dangerous Data with $sce and $sanitize
 AngularJS has some nice built-in support for mitigating the risk of injection attacks using the:
     . $sce : service that removes dangerous elements from HTML
     . $sanitize : replaces dangerous characters in HTML with their escaped counterparts
@@ -925,6 +925,31 @@ If you want to disable some of the HTML escaping to allow HTML to be rendered yo
 
 Then, you can use the directive ng-bind-html which will disable dangerous HTML but will allow some of the parts to be rendered:
     <span ng-bind-html="htmlData"></span>
+
+You can rely on the default behavior of AngularJS to prevent most of the XSS attacks related to display of values. Nevertheless, it is recommended to sanitize the values that you store in your application, so that the data that you sent to the backend has been sanitized. This can be used by directly using the $sanitize service:
+
+        $scope.$watch('htmlData', function(newValue) {
+                $scope.htmlData = $sanitize(newValue);
+            });
+
+You can disable sce on a piece of HTML by using:
+            $scope.$watch('htmlData', function(newValue) {
+                $scope.trustedHtmlData = $sce.trustAsHtml(newValue);
+            });
+
+And binding the data using:
+            <div class="panel-body">
+                <span ng-bind-html="trustedHtmlData"></span>
+            </div>
+
+### Expressions and Directives Services
+AngularJS provides some services that are used to process content into functions that you can then invoke to generate content in your applications, ranging from simple expressions to fragments of HTML that contain bindings and directives.
+
+    . $compile : converts an HTML fragment that contains bindings and directives into a function that can be invoked to generate content.
+    . $interpolate : converts a string that contain inline bindings into a function that can be invoked to generate content.
+    . $parse : converts AngularJS expressions into functions that can be invoked to generate content.
+
+These services are typically used on advanced directives when you get into problems that require precise management of templates.
 
 
 # Examples
@@ -1214,3 +1239,9 @@ This example does not use services, but serves as a starting point for the rest 
 082-services-exceptionhandler-override: Illustrates how to create your own exception handler that overrides the one provided by AngularJS.
 
 083-services-security-sce-default: Illustrates how the sce automatically disables dangerous HTML from being executed.
+
+084-services-security-ngsanitize: Illustrates how to use ng-bind-html directive from the angular-sanitize module to allow some HTML to be rendered on the screen.
+
+085-services-security-sanitize: Illustrates how to use the $sanitize service to programmatically clean the values to be sent to the backend.
+
+086-services-security-sce-disable: Illustrates how to disable $sce so that everthing is displayed as received.
