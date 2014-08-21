@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS Example</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app-controllers.js"></script>
+</head>
+<body ng-controller="DefaultController">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>URL</h4>
+        </div>
+        <div class="panel-body">
+            <p>The URL is: {{url}}</p>
+            <p>The host is: {{host}}</p>
+            <div class="btn-group">
+                <button class="btn btn-primary" ng-click="setUrl('reset')">Reset</button>
+                <button class="btn btn-primary" ng-click="setUrl('path')">Path</button>
+                <button class="btn btn-primary" ng-click="setUrl('hash')">Hash</button>
+                <button class="btn btn-primary" ng-click="setUrl('search')">Search</button>
+                <button class="btn btn-primary" ng-click="setUrl('url')">URL</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

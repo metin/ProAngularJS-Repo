@@ -845,6 +845,32 @@ This services accepts the following arguments:
     . count : the number of times that the delay/execute cycle will be repeated ($interval only). A    value of zero means no limit.
     . invokeApply: when set to true (default), fn will be executed within the scope.$apply method.
 
+#### Location Service and accessing the URL
+The $location service is a wrapper around the location property of the global window object and provides access to the current URL. The $location service operates on the part of the URL following the first # character, which means it can be used to navigate within the current document but not no navigate to new documents.
+
+** NOTE **
+In SPAs you rarely want the user to navigate away from the main document because it unloads your web application and discards your data and state.
+
+For a URL like:
+http://localhost:5000/#/cities/london?select=hotels#north
+
+The $location service defines the following methods:
+    . absUrl() : returns the complete of the current document including the parts before the first `#` character (http://localhost:5000/#/cities/london?select=hotels#north).
+    . hash()/hash(target): gets or sets the hash section of the URL (north)
+    . host : returns the hostname (localhost)
+    . path()/path(target): get or sets the path component of the URL (/cities/#london)
+    . port() : returns the port number (5000)
+    . protocol() : returns the protocol component (http)
+    . replace() : when called on an HTML5 browser the change in the URL replaces the most recent entry in the browser history rather than creating a new one
+    . search()/search(term, params) : gets or sets the search term (select=hotels)
+    . url()/url(target) : gets or sets the path, query string and hash (cities/london?select=hotels#north)
+
+And the following events:
+    . $locationChangeStart : triggered before the URL is changed. You can prevent the URL from changing by calling the preventDefault method on the Event object.
+    . $locationChangeSuccess : triggered after the URL has changed.
+
+
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -1114,3 +1140,5 @@ This example does not use services, but serves as a starting point for the rest 
 073-services-document-object: Illustrates how to use the $document object to access the DOM document and register an event handler for a button.
 
 074-services-interval-timeout: Illustrates how to use the $interval service to display the current time to the second on the page.
+
+075-services-location: Illustrates how to use the $location service to set and get the URL components.
