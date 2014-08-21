@@ -833,6 +833,17 @@ AngularJS provides the following services that expose DOM API features:
     . $window : provides a reference to the DOM window object
 
 
+#### Intervals and Timeouts
+The $interval and $timeout services lets you handle intervals and timeouts:
+    . $timeout service delays and executes the function only once
+    . $interval service delays and executes periodically
+
+
+This services accepts the following arguments:
+    . fn : function to be executed after the delay has expired
+    . delay : the number of milliseconds before fn will be executed
+    . count : the number of times that the delay/execute cycle will be repeated ($interval only). A    value of zero means no limit.
+    . invokeApply: when set to true (default), fn will be executed within the scope.$apply method.
 
 # Examples
 
@@ -1101,3 +1112,5 @@ This example does not use services, but serves as a starting point for the rest 
 072-services-window-object: Illustrates how to use the $window service to access the DOM window object that for example gives you access to the alert() method.
 
 073-services-document-object: Illustrates how to use the $document object to access the DOM document and register an event handler for a button.
+
+074-services-interval-timeout: Illustrates how to use the $interval service to display the current time to the second on the page.
