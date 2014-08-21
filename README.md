@@ -907,6 +907,12 @@ To use anchorScroll service you just have to declare the dependency, and $locati
 This default behavior can be disabled by configuring the anchorScrollProvider and calling:
 $anchorScrollProvider.disableAutoScrolling(). If you do so, you will be responsible for calling $anchorScroll() whenever you want to jump.
 
+### The $log service
+AngularJS provide the $log service which is a wrapper around the console object. The $log service defines the debug, error, info, log and warn methods to display message with those levels.
+
+### Exceptions
+AngularJS uses the $exceptionHandler service to handle any exceptions that arise during the execution of an application and that are not caught using JavaScript's try-catch mechanism. The default implementation calls the error method defined by the $log service.
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -1184,3 +1190,5 @@ This example does not use services, but serves as a starting point for the rest 
 077-services-anchorscroll: demonstrates how to use the $anchorScroll service to automatically scroll to a given anchor when using $location.hash() method.
 
 078-services-anchorscroll-disable: demonstrates how to disable the automatic scrolling when $location.hash is invoked, and how to force scrolling to a given anchor calling the service.
+
+079-services-logging: demonstrates how to use the $log service, which is a wrapper around the console object.
