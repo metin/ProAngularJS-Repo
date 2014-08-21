@@ -869,7 +869,20 @@ And the following events:
     . $locationChangeStart : triggered before the URL is changed. You can prevent the URL from changing by calling the preventDefault method on the Event object.
     . $locationChangeSuccess : triggered after the URL has changed.
 
+Note that in a URL like http://localhost:5000/#/cities/london?select=hotels#north we are trying to replicate a URL after the first `hash` which is kind of messy.
+HTML5 provides a more elegant approach using the History API, which lets you get rid of the `#` so that
+the URL becomes: http://localhost:5000/cities/london?select=hotels#north
+without having to reload the page.
 
+This can be done by enabling the html5 mode for the locationProvider service:
+        .config(['$locationProvider', function($locationProvider) {
+            $locationProvider.html5Mode(true);
+        }]);
+
+As it is a relatively new feature, it is advisable to check if that feature is available:
+    if (window.history && history.pushState) {
+        $locationProvider.html5Mode(true);
+    }
 
 # Examples
 
