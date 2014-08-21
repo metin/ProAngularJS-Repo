@@ -957,6 +957,8 @@ Interpolate is configurable so that you can use a delimiter different from `{{}}
             Result: <span eval-expression amount="dataValue" tax="21"></span>
         </div>
 
+## Services for AJAX and Promises
+
 
 # Examples
 
@@ -1259,3 +1261,5 @@ This example does not use services, but serves as a starting point for the rest 
 089-services-interpolate: Illustrates the use of $interpolate to achieve the same results as 088-.
 
 090-services-interpolate-no-moustaches: Illustrates how to change the interpolation characters so that {{}} are no longer used to identify inline binding expressions.
+
+091-services-compile: Illustrates how to use $compile service to generate content dynamically in a directive.
