@@ -913,6 +913,20 @@ AngularJS provide the $log service which is a wrapper around the console object.
 ### Exceptions
 AngularJS uses the $exceptionHandler service to handle any exceptions that arise during the execution of an application and that are not caught using JavaScript's try-catch mechanism. The default implementation calls the error method defined by the $log service.
 
+### Dangerous Data
+AngularJS has some nice built-in support for mitigating the risk of injection attacks using the:
+    . $sce : service that removes dangerous elements from HTML
+    . $sanitize : replaces dangerous characters in HTML with their escaped counterparts
+
+AngularJS has a good default policy for dealing with dangerous content, but you will have to work with $sce and $sanitize when you need more flexibility (for example, when creating an HTML editor).
+
+If you want to disable some of the HTML escaping to allow HTML to be rendered you have to install the angular-sanitize module:
+    bower install ng-sanitize --save
+
+Then, you can use the directive ng-bind-html which will disable dangerous HTML but will allow some of the parts to be rendered:
+    <span ng-bind-html="htmlData"></span>
+
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -1198,3 +1212,5 @@ This example does not use services, but serves as a starting point for the rest 
 081-services-exceptionhandler: Illustrates how to invoke the $exceptionhandler programmatically.
 
 082-services-exceptionhandler-override: Illustrates how to create your own exception handler that overrides the one provided by AngularJS.
+
+083-services-security-sce-default: Illustrates how the sce automatically disables dangerous HTML from being executed.
