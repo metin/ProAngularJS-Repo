@@ -772,7 +772,56 @@ This can be used to leverage prototype inheritance in some cases.
 The Module.provider method creates a service object. It receives the name of the service and a factory function that must return a provider object, that defines a method called $get, which must in turn return the service object.
 When AngularJS needs to satisfy a dependency for this service it will call the factory method to get the provider object and then will call the $get method to get the service object.
 
+        .provider('logService', [function() {
+            return {
+                $get: function() {
+                    return {
+                        messageCount: 0,
+                        log: function(msg) {
+                            console.log('(LOG +' + (this.messageCount++) + ') ' + msg);
+                        }
+                    };
+                }
+            };
+        }]);
+
 The advantages of using the provider strives in that you can add functionality to the provider method that can be used to configure the returned object.
+
+        .provider('logService', [function() {
+            var counter = true;
+            var debug = true;
+            return {
+                messageCounterEnabled: function(setting) {
+                    if (angular.isDefined(setting)) {
+                        counter = setting;
+                        return this;
+                    } else {
+                        return counter;
+                    }
+                },
+                debugEnabled: function(setting) {
+                    if (angular.isDefined(setting)) {
+                        debug = setting;
+                        return this;
+                    } else {
+                        return debug;
+                    }
+                },
+                $get: function() {
+                    return {
+                        messageCount: 0,
+                        log: function(msg) {
+                            if (debug) {
+                                console.log('(LOG' +
+                                    (counter ? ' +' + (this.messageCount++) : '') +
+                                    ') ' + msg);
+                            }
+                        }
+                    };
+                }
+            };
+        }]);
+
 
 # Examples
 
@@ -1036,3 +1085,4 @@ This example does not use services, but serves as a starting point for the rest 
 
 070-services-creation-provider: Illustrates how to create a service using the Module.provider method, which uses the $get method on the object returned by the factory function to create the service. See 071- to see an example of how to leverage this to provide more functionality in the service.
 
+071-services-creation-provider-config: Illustrates how to leverage the Module.provider method to create a configurable service.
