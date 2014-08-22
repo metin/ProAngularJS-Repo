@@ -1090,6 +1090,115 @@ Representational State Transfer (REST) is a style of API that operates over HTTP
 
 You should use AngularJS services for REST when you are performing operations on a RESTful API, as it is more advantageous than using $http service for making Ajax requests.
 
+The $resource service is defined within an optional module called ngResource that can be installed via:
+`bower install angular-resource --save`
+
+As always, you will have to include that module in the index.html to make it available to your app, and also declare the dependency to ngResource in the main module of your application:
+    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+
+    angular.module('exampleApp', ['exampleApp.Controllers', 'ngResource'])
+
+
+### Configuring the $resource service
+** Note **
+All the information of this section reference the example 104- (URLs, methods, etc.)
+
+After setting up the dependency with ngResource, you have to set up the $resource service so that it knows how to work with the RESTful API exposed by the backend:
+
+    $scope.productsResource = $resource(baseUrl + ':id', {id: '@id'});
+
+The $resource service object is a function that is used to describe the URLs that are used to consume the RESTful service. The URL segments that change per object are prefixed with a colon `:`.
+    . The first argument to the $resource function is http:\\localhost:9000\server\rest\products\:id
+    . The second argument is a configuration object whose properties specify where the value for the variable segment will come from. Each property must correspond to a variable segment from the first argument.
+
+The result of calling $resource() is an access object that can be used to query and modify the server data using the following methods:
+
+| Name                    | HTTP   | URL                        | Description
+| ----------------------- | ------ | -------------------------- | ----------------------------------------
+| delete(params, product) | DELETE | /server/rest/products/{id} | Removes the object with the given id
+| get(id)                 | GET    | /server/rest/products/{id} | Gets the object with the given id
+| query()                 | GET    | /server/rest/products/     | Gets all the objects as an array
+| remove(params, product) | DELETE | /server/rest/products/{id} | Removes the object with the given id
+| save(product)           | POST   | /server/rest/products/{id} | Saves modifications to the object with the given id
+
+The delete and remove methods are identical.
+
+### Listing the REST data
+Once you have the access object, you can assign it to a variable that can be used to obtain all the data from the server:
+    $scope.productsResource = $resource(baseUrl + ':id', {id: '@id'});
+    $scope.products = $scope.productsResource.query();
+
+The array returned by the query method is initially empty, and is populated only when the underlying async HTTP request to the server is completed.
+
+If you have to perform some kind of action when the request data is available, you can use a promise object that is included as part of the query() response:
+    $scope.productsResource = $resource(baseUrl + ':id', {id: '@id'});
+    $scope.products = $scope.productsResource.query();
+    $scope.products.$promise.then(fnSuccess, fnError);
+
+That promise is fulfilled after the result array is populated.
+
+### Modifying REST Data
+The query() method populates the collection array with Resource objects, which define all of the properties specified in the data returned by the server and some methods that allow manipulation of the data without having to use the collections array (which simplifies tremendously CRUD related code!)
+
+The methods provided by the Resource objects are:
+    . $delete : deletes the object from the server, equivalent to $remove()
+    . $get    : refreshes the object from the server, clearing any uncommitted local changes
+    . $remove : deletes the object from the server, equivalent to $delete()
+    . $save   : saves the object to the server
+
+All of the resource object methods return a promise that you can use to receive notifications when the request completes or fails.
+
+The $save method for updating a Resource object that represents a product is used as:
+    product.$save();
+
+The $get method for retrieving a Resource object that represents a products is used ad:
+    $scope.currentProduct.$get();
+
+The $delete and $remove method send the request to remove an object from the server, but don't remove the object from the collection array. This is the safest approach as you don't know what the outcome of the request will be, and therefore, you have to use the promise returned by the $delete method to perform the removal from the local array of resources that represent the products:
+                product.$delete().then(function() {
+                    $scope.products.splice($scope.products.indexOf(product), 1);
+                });
+
+The $save method for creating a new product requires creating first a new resource that will represent that product. This is done using:
+                new $scope.productsResource(product).$save().then(function(newProduct) {
+                    $scope.products.push(newProduct);
+                    $scope.displayMode = 'list';
+                });
+Thus, you apply the new keyword on the access object, and then call $save(). Again, the $save method doesn't update the collection array when new objects are saved to the server (but they do when they update an existing object!!!) so you have to use the promise returned by $save to perform the actions that you want to take when the request is completed.
+
+### Configuring the $resource Service Actions
+The get, save, remove and delete methods available on the collections array and the equivalent $get, $save, etc. are known as actions.
+By default, $resource service defines the actions according to the table above (query - GET, save - POST, etc.) but you can easily configure the mapping using a third parameter in the $resource() call:
+    $scope.productsResource = $resource(baseUrl + ':id', {id: '@id'},
+        {
+            create: {method: 'POST'},
+            save: {method: 'PUT'}
+        });
+
+When using this, you will be defining new actions, whose names correspond to the action that is being defined, or redefined (as in the save case).
+
+Each action property is set to a configuration object that allows the following parameters:
+    . method : sets the HTTP method that will be used for the Ajax requests.
+    . params : specifies the values for the segment variables in the URL passed as the first argument to the $resource service function.
+    . url    : overrides the default URL for this action.
+    . isArray: when true, specifies that the response will be a JSON data array. The default value, specifies that the response will be at most one object.
+    . transformRequest
+    . transformResponse
+    . cache
+    . timeout
+    . withCredentials
+    . responseType
+    . interceptor
+
+Actions that are defined in this way are just like the defaults and can be called on the collection array an on individual Resource objects:
+                new $scope.productsResource(product).$create().then(function(newProduct) {
+                    $scope.products.push(newProduct);
+                    $scope.displayMode = 'list';
+                });
+
+### Leveraging $resource-ready Components
+Using the $resource service lets you write components that can operate on RESTful data without needing to know the details of the underlying Ajax requests that are required to manipulate the data. You can see an example of how to do that in the directive from 104-.
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -1418,3 +1527,5 @@ This example does not use services, but serves as a starting point for the rest 
 Note that this project requires that backend-app is running on port 9000. See backend-app README.md for more details, but you can start it by typing `mvn spring-boot:run` in your shell.
 
 103-services-rest-http-caveat: Illustrates why it is not recommended to use $http service for interacting with RESTful backends. In the example, a button is added on the table view to increment the price of the product (this is handled by a new directive increment). As this directive is not linked to the $http service, no update is notified to the backend and therefore, if you reload the application, the update in the price will be lost.
+
+104-services-rest-resource: Illustrates how to properly use the ngResource module for dealing with RESTful backends. It is also demonstrated how to use dynamically the RESTful nature of the resources within a directive. See the documentation for more details.
