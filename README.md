@@ -1085,6 +1085,11 @@ You can do this using the $q.all() method which accepts an array of promises and
 
 See 100- for an example.
 
+## Services for REST
+Representational State Transfer (REST) is a style of API that operates over HTTP requests. The requested URL identifies the data to be operated on, and the HTTP method identifies the operation that is to be performed.
+
+You should use AngularJS services for REST when you are performing operations on a RESTful API, as it is more advantageous than using $http service for making Ajax requests.
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -1406,3 +1411,10 @@ This example does not use services, but serves as a starting point for the rest 
 099-promises-chaining: Illustrates how promises can be chained together. In the example, chaining is used to format the contents that will be used in the outcome binding.
 
 100-promises-grouping: Illustrates how to use the $q.all to group promises. In the example, grouping is used to wait for the use to click on both groups of buttons before a result is bound in the outcome.
+
+101-services-rest-no-connection: The scaffolding for the REST service chapter. This example includes all the logic needed to perform local CRUD operation on products, but do not include any connection to the backend.
+
+102-services-rest-http: Illustrates how to communicate with a RESTful backend using the $http service.
+Note that this project requires that backend-app is running on port 9000. See backend-app README.md for more details, but you can start it by typing `mvn spring-boot:run` in your shell.
+
+103-services-rest-http-caveat: Illustrates why it is not recommended to use $http service for interacting with RESTful backends. In the example, a button is added on the table view to increment the price of the product (this is handled by a new directive increment). As this directive is not linked to the $http service, no update is notified to the backend and therefore, if you reload the application, the update in the price will be lost.
