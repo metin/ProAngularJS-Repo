@@ -1034,6 +1034,57 @@ The $httpProvider.interceptors is an array into which you insert factory functio
             });
         }]);
 
+### Promises
+Promises are a way of registering interest in something that will happen in the future, such as the response sent from a server for an Ajax request. Promises are not unique to AngularJS, but there are variations in the implementations to accommodate the differences in design philosophy.
+
+There are two objects required for a promise: a promise object, which is used to receive notifications about the future outcome, and a deferred object, which is used to send notifications - the deferred object is used to send information about the outcome of the task or activity via the promise objects.
+
+AngularJS provides the $q service for obtaining and managing promises, which it does through the following methods:
+    . all(promises) : returns a promise that is resolved when all of the promises in the specified array are resolved or ony of them are rejected.
+    . defer() : creates a deferred object.
+    . reject(reason) : returns a promise that is always rejected
+    . when(value) : wraps a value in a promise that is always resolved(with the specified value as result)
+
+#### Getting and Using the Deferred Object
+To create a deferred object to report on the eventual outcome of a task or activity you first need to obtain the object using `$q.defer()`.
+
+A deferred object provides the following methods and properties:
+    . resolve(result) : signals that the deferred activity has completed with the specified value.
+    . reject(reason) : signals that the deferred activity has failed for the specified reason.
+    . notify(result) : provides an interim result from the deferred activity.
+    . promise : returns a promise object that receives the signals from the other methods.
+
+Typically, you will expose the promise object to other parts of the application while keeping the deferred object out of reach of other components. For example, you can create a directive that creates the deferred object and expose the promise through the directive controller.
+
+#### Consuming the Promise object
+The Promise object defines the following methods:
+    . then(success, error, notify) : registers functions that are invoked in response to the deferred object's resolve, reject and notify methods. The functions are passed the arguments that were used to call the deferred object's methods.
+    . catch(error) : registers an error handling function, which is passed the argument used to call the deferred object's reject method.
+    . finally(fn) : registers a function that is invoked irrespective of the promise being resolved or rejected. The function is passed the argument used to call the deferred object's resolve or reject method.
+
+** NOTE **
+Notice that the Promise object does not define the success() and error() methods used in the $http service. Those are convenience methods added to make working with $http service more transparent.
+
+Promises represent a single instance on an activity, and once they are resolved or rejected cannot be be used again.
+
+#### Chaining Outcomes Together
+Promises have the ability to chain promises together to create a more complex arrangement of outcomes. This is possible because the methods defined by the promise object, such as then(), return another promise, which is resolved then the callback function has completed execution.
+
+        ctrl.promise.then(function(result) {
+            return 'Success (' + result + ')';
+        }).then(function(result) {
+            element.text(result);
+        });
+
+When you chain promises together, you can manipulate the result that is passed along to the next promise in the chain. In the example abobe, the text element will then be the result of the first handler function (`Success (result)`).
+
+#### Grouping Promises
+Besides chains on promises in which each handler function is executed in a sequence, it is possible to group promises. This is useful when you want to defer an activity until the other several outcomes are available.
+
+You can do this using the $q.all() method which accepts an array of promises and return a promise that isn't resolved until all of the input promises are resolved.
+
+See 100- for an example.
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -1349,3 +1400,9 @@ This example does not use services, but serves as a starting point for the rest 
 096-services-http-global-config: Illustrates how to perform global configuration of the $http service using the $httpProvider.
 
 097-services-http-global-interceptors: Illustrate how to use the $httpProvider to register an interceptor that will act on the requests and responses.
+
+098-promises: A simple example of Promises that contains three buttons and inline data binding for a property. The idea is to use the deferred and promise objects to wire up the buttons such that clicking one of them will update the outcome binding.
+
+099-promises-chaining: Illustrates how promises can be chained together. In the example, chaining is used to format the contents that will be used in the outcome binding.
+
+100-promises-grouping: Illustrates how to use the $q.all to group promises. In the example, grouping is used to wait for the use to click on both groups of buttons before a result is bound in the outcome.
