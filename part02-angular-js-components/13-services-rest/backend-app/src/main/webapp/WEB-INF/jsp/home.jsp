@@ -52,7 +52,7 @@
 								</tr>							
 								<tr>
 									<td>Update a Product</td>
-									<td>PUT</td>
+									<td>PUT / POST</td>
 									<td>/server/rest/products/{id}</td>
 									<td>A single object</td>
 									<td>The saved object</td>

@@ -33,6 +33,11 @@ public class ProductResource {
 		return mapperHelper.fromProducts(productService.getProducts());
 	}
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ProductDTO getProduct(@PathVariable("id") Long id) {
+		return mapperHelper.fromProduct(productService.getProductById(id));
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void deleteProduct(@PathVariable("id") Long id) {
 		productService.deleteProduct(id);
@@ -43,7 +48,7 @@ public class ProductResource {
 		return mapperHelper.fromProduct(productService.createProduct(mapperHelper.toProduct(productDTO)));
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{id}", method = {RequestMethod.PUT, RequestMethod.POST}, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ProductDTO updateProduct(@PathVariable("id") Long id, @RequestBody ProductDTO productDTO) {
 		return mapperHelper.fromProduct(productService.updateProduct(mapperHelper.toProduct(productDTO)));
 	}
