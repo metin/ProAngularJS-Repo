@@ -1199,6 +1199,87 @@ Actions that are defined in this way are just like the defaults and can be calle
 ### Leveraging $resource-ready Components
 Using the $resource service lets you write components that can operate on RESTful data without needing to know the details of the underlying Ajax requests that are required to manipulate the data. You can see an example of how to do that in the directive from 104-.
 
+## Services for Views
+This section deals with URL routing, which uses views to enable sophisticated navigation within an application.
+This services are intended for simplifying complex applications by allowing multiple components to control the content that user sees. For small projects, it is recommended to use ng-include as an alternative.
+
+** NOTE **
+The ng-include approach almost always involves setting the value of a variable defined in a particular controller:
+    $scope.displayMode = 'list';
+
+which must be accessed from anywhere in the application whenever we want to update the view:
+    . in the controller: $scope.displayMode = 'list';
+
+    <ng-include src="'tableView.html'" ng-show="displayMode === 'list'"></ng-include>
+
+This approach does not scale well in large and complex applications.
+
+First thing you need to do to use URL Routing is install the ngRoute module:
+    `bower install angular-rout --save`
+
+As always, you will have to update the index.html and the app module dependencies:
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+    angular.module('exampleApp', ['exampleApp.Controllers', 'ngRoute']);
+
+### Defining URL Routes
+The ngRoute service lets you perform the mapping between URLs and view file names. When the value returned by the $location.path method matches one of the mappings defined, the corresponding view file will be loaded and displayed. The mappings are defined using the provider for the $route service:
+    angular.module('exampleApp', ['exampleApp.Controllers', 'ngRoute'])
+        .config(function($routeProvider, $locationProvider) {
+            $routeProvider.when('/list', {
+                templateUrl: '/tableView.html'
+            });
+
+            $routeProvider.when('/edit', {
+                templateUrl: '/editorView.html'
+            });
+
+            $routeProvider.when('/create', {
+               templateUrl: '/editorView.html'
+            });
+
+            $routeProvider.otherwise({
+                templateUrl: '/tableView.html'
+            });
+
+** NOTE **
+Always specify the value of templateUrl with a leading `/` so that it is evaluated as an absolute URL. Otherwise, it will be evaluated relative to the value returned by the $location.path() and you can easily end up with a 404 - Not Found.
+
+### Displaying the Selected View
+The ngRoute module includes a directive called ng-view that displays the contents of the view file specified by the route that matches the current URL path returned by the $location service.
+    ...
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">Products</h1>
+        </div>
+        <ng-view></ng-view>
+    ...
+
+** NOTE **
+Routing works when the application changes the URL, but it doesn't work if the user changes it manually. In that case, the browser tries to request the content corresponding to that URL from the server.
+
+
+### Using Route Parameters
+Route URLs can contain route parameters, which match one or more segments in the path displayed by the browser (a segment is a set of characters between two `/`).
+    For example:
+        http://localhost:5000/users/adam/details
+    has the segments:
+        users, adam and details.
+
+You can have conservative and eager parameters:
+
+    . conservative: The second segment and only the second segment will be assigned to id
+            $routeProvider.when('/edit/:id', {
+                templateUrl: '/editorView.html'
+            });
+
+    . eager: the second segment and only the second segment will be assigned to id, and the following parameters will be assigned to data.
+            $routeProvider.when('/edit/:id/:data*', {
+                templateUrl: '/editorView.html'
+            });
+
+### Accessing Routes and Routes Parameters
+
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -1529,3 +1610,5 @@ Note that this project requires that backend-app is running on port 9000. See ba
 103-services-rest-http-caveat: Illustrates why it is not recommended to use $http service for interacting with RESTful backends. In the example, a button is added on the table view to increment the price of the product (this is handled by a new directive increment). As this directive is not linked to the $http service, no update is notified to the backend and therefore, if you reload the application, the update in the price will be lost.
 
 104-services-rest-resource: Illustrates how to properly use the ngResource module for dealing with RESTful backends. It is also demonstrated how to use dynamically the RESTful nature of the resources within a directive. See the documentation for more details.
+
+105-services-views-basic: Illustrates the most basic usage of ngRoute module for routing logical views such as '/list' into physical views '/tableView.html'. The example is a transformation of 104- in which the displayMode is removed. The example needs the backend-app, which can be started using `mvn spring-boot:run`.
