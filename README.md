@@ -1318,6 +1318,12 @@ The following table lists the Route configuration options:
 If you have lots of views in an application, having them share a single controller becomes difficult to manage and test. The controller configuration option allows you to specify a controller that has been previously registered through the Module.controller method for the view.
 By using this option you will be separating the behavior that is unique to each view.
 
+When using this technique, the view controller will be nested within the top-controller, so that you will be able to define the common behavior on the parent controller and only the behavior specific to the view will be specified in this view controller.
+
+### Adding Dependencies to Routes
+The resolve configuration property allows you to specify dependencies that will be injected into the controller specified with the controller property.
+Typically, you will use this property to perform work required to initialize the view. This is so because you can return promise objects as dependencies and the route won't instantiate the controller until they are resolved.
+
 
 # Examples
 
@@ -1651,3 +1657,7 @@ Note that this project requires that backend-app is running on port 9000. See ba
 104-services-rest-resource: Illustrates how to properly use the ngResource module for dealing with RESTful backends. It is also demonstrated how to use dynamically the RESTful nature of the resources within a directive. See the documentation for more details.
 
 105-services-views-basic: Illustrates the most basic usage of ngRoute module for routing logical views such as '/list' into physical views '/tableView.html'. The example is a transformation of 104- in which the displayMode is removed. The example needs the backend-app, which can be started using `mvn spring-boot:run`.
+
+106-services-views-route-params: Illustrates how you can access route parameters programmatically. In this case, when the user clicks on the edit link, the path is changed to /edit/{{product.id}} so that the editor knows which product is to be edited. In the example, the controller is registered to be notified when the route changes, and when it happens if it matches the /edit/id pattern, the id is extracted.
+
+107-serviews-views-route-controller: Illustrates how to assign a controller to the editorView so that all the editing behavior is handled from that controller.
