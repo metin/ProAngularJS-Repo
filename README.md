@@ -1460,8 +1460,6 @@ The methods defined for the $injector service are:
 
 There is rarely a need to work directly with this service.
 
-### Determining Function Dependencies
-
 
 # Examples
 
@@ -1809,3 +1807,7 @@ Note that this project requires that backend-app is running on port 9000. See ba
 111-touch-basics: Illustrates the basics of the ngTouch module. In particular, the example declares a handler for the swipe events.
 
 112-service-provide: Illustrates how to leverage the $provide.decorate() method to decorate the $log service so that AngularJS uses the service decorated by us to resolve dependencies.
+
+113-service-injector-function-dependencies: Illustrates how to use the $injector.annotate() to obtain the dependecies declared for a function.
+
+114-service-injector-get: Illustrates how to obtain and feed the dependencies into a function so that it can be called programmatically.
