@@ -1324,6 +1324,29 @@ When using this technique, the view controller will be nested within the top-con
 The resolve configuration property allows you to specify dependencies that will be injected into the controller specified with the controller property.
 Typically, you will use this property to perform work required to initialize the view. This is so because you can return promise objects as dependencies and the route won't instantiate the controller until they are resolved.
 
+    angular.module('exampleApp', ['exampleApp.Controllers', 'exampleApp.Directives', 'ngResource', 'ngRoute'])
+        .constant('baseUrl', 'http://localhost:9000/server/rest/products/')
+        .factory('productsResource', ['$resource', 'baseUrl', function($resource, baseUrl) {
+            return  $resource(baseUrl + ':id', {id: '@id'},
+                {   create: {method: 'POST'},
+                    save: {method: 'PUT'}
+                });
+        }])
+        .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+
+            $locationProvider.html5Mode(true);
+
+...
+            $routeProvider.otherwise({
+                templateUrl: '/tableView.html',
+                controller: 'TableController',
+                resolve: {
+                    data: ['productsResource', function(productsResource) {
+                        return productsResource.query();
+                    }]
+                }
+            });
+        }]);
 
 # Examples
 
@@ -1661,3 +1684,5 @@ Note that this project requires that backend-app is running on port 9000. See ba
 106-services-views-route-params: Illustrates how you can access route parameters programmatically. In this case, when the user clicks on the edit link, the path is changed to /edit/{{product.id}} so that the editor knows which product is to be edited. In the example, the controller is registered to be notified when the route changes, and when it happens if it matches the /edit/id pattern, the id is extracted.
 
 107-serviews-views-route-controller: Illustrates how to assign a controller to the editorView so that all the editing behavior is handled from that controller.
+
+108-services-views-route-dependencies: Illustrates how to use the resolve configuration property on the route to specify a dependency. In this case, the dependency consists in the data received from the backend.
