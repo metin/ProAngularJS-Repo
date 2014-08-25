@@ -1414,6 +1414,55 @@ Once installed, you will be provided with events such as ng-click (improved for 
         <h4>Swipe Here</h4>
     </div>
 
+## Services for Provision and Injection
+This section describe the services that AngularJS uses behind the scenes for registering AngularJS components and injecting them to resolve dependencies.
+The contents of this section are particularly interesting for the unit testing.
+
+### Registering AngularJS components
+The $provide service is used to register components such as services so that they can be injected in order to satisfy the required dependencies. Most of the functionality defined by the $provide service is exposed and accessed through the Module type, but not all (the decorator).
+
+The following table lists the methods defined by the $provide service:
+    . constant(name, value)    : defines a constant value
+    . decorator(name, service) : defines a service decorator
+    . factory(name, service)   : defines a service
+    . provider(name, service)  : defines a service
+    . service(name, service)   : defines a service
+    . value(name, value)       : defines a value service
+
+The decorator method is used to intercept requests for a service in order to provide different or additional functionality.
+
+For example, to decorate the $log service:
+    angular.module('exampleApp', ['exampleApp.Controllers'])
+        .config(['$provide', function($provide) {
+            $provide.decorator('$log', function($delegate) {
+                $delegate.originalLog = $delegate.log;
+                $delegate.log = function(message) {
+                    $delegate.originalLog('Decorated: ' + message);
+                };
+                return $delegate;
+            });
+        }]);
+
+The arguments to the decorator method are the name of the service to decorate ($log) and a decorator function that must declare a dependency on $delegate, which is used to pass the original service to your function.
+
+Your decorator function must return the object you want used to resolve dependencies for the service you specified.
+
+You can change a service in any way that you want, but you must remember that the object you return from your decorator function will be passed to components that already have an expectation about the nature of the service object.
+
+### Managing Injection
+The $injector service is responsible for determining the dependencies that a function declares and resolving those dependencies.
+
+The methods defined for the $injector service are:
+    . annotate(fn) : gets the arguments for the specified function, including those that do not correspond to services.
+    . get(name) : gets the service object for the specified service name
+    . has(name) : returns true if a service exists for the specified name
+    . invoke(fn, self, locals) : invokes the specified function, using the specified value for this and the specified nonservice argument values.
+
+There is rarely a need to work directly with this service.
+
+### Determining Function Dependencies
+
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -1758,3 +1807,5 @@ Note that this project requires that backend-app is running on port 9000. See ba
 110-animation-caveats: Demonstrates that when working with animations you shouldn't mind the departure of old content, because during some time both views will be shown and that produces an unappealing effect. The example requires the backend-app to be running, which you can do by typing `mvn spring-boot:run`.
 
 111-touch-basics: Illustrates the basics of the ngTouch module. In particular, the example declares a handler for the swipe events.
+
+112-service-provide: Illustrates how to leverage the $provide.decorate() method to decorate the $log service so that AngularJS uses the service decorated by us to resolve dependencies.
