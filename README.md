@@ -1348,6 +1348,56 @@ Typically, you will use this property to perform work required to initialize the
             });
         }]);
 
+## Services for Animation
+The $anime service allows you to provide transition effects when elements are added, removed or moved in the DOM. This service relies on CSS3 animation and transition features.
+
+Animations should be subtle, brief and quick. The goal's to draw the user's attention to the fact that something has changed. Animations should be used consistently, cautiously and sparingly.
+
+To install the animation module you should type:
+    `bower install angular-animate --save`
+
+Then, you will have to establish the dependency with the ngAnimate module and include the angular-animate.js file:
+
+    angular.module('exampleApp', ['exampleApp.Controllers', 'exampleApp.Directives',
+                                    'ngResource', 'ngRoute', 'ngAnimate'])
+
+    <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
+
+In the example, we define the style and apply it as a class in the directive:
+    <style type="text/css">
+        .ngFade.ng-enter {
+            transition: .5s linear all;
+            opacity: 0;
+        }
+        .ngFade.ng-enter-active {
+            opacity: 1;
+        }
+    </style>
+
+    <div ng-view class="ngFade"></div>
+
+This produces a fade effect each time the view is changed.
+
+The key to understand what's happening is the knowledge that some of the built-in directives support animations when they change their content:
+
+    . ng-repeat  : enter, leave, move
+    . ng-view    : enter, leave
+    . ng-include : enter, leave
+    . ng-switch  : enter, leave
+    . ng-if      : enter, leave
+    . ng-class   : add, remove
+    . ng-show    : add, remove
+    . ng-hide    : add, remove
+
+The name `enter` is used when the content is shown to the user.
+The name `leave` is used when the content is hidden from the user.
+the name `move` is used when the content is moved within the DOM.
+The names `add` and `remove` are used when the content is added and removed from the DOM.
+
+In the example:
+    .ngFade.ng-enter : the first part of the name ngFade is the named used to apply the animations or transitions such as in class="ngFade". The second part tells AngularJS what the CSS style is to be used for: ng-enter and ng-enter-active. The first one defines the start point and details of the transition. The second one defines the end-point for the transition.
+The name enter is used when the content is shown to the user.
+The name `leave`
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -1686,3 +1736,7 @@ Note that this project requires that backend-app is running on port 9000. See ba
 107-serviews-views-route-controller: Illustrates how to assign a controller to the editorView so that all the editing behavior is handled from that controller.
 
 108-services-views-route-dependencies: Illustrates how to use the resolve configuration property on the route to specify a dependency. In this case, the dependency consists in the data received from the backend.
+
+109-animation-basics: Illustrates how to apply basic fade-in transition to the ng-view.
+
+110-animation-caveats: Demonstrates that when working with animations you shouldn't mind the departure of old content, because during some time both views will be shown and that produces an unappealing effect.
