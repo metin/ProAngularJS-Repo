@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>AngularJS Example</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app-controllers.js"></script>
+    <script type="text/javascript" src="app-filters.js"></script>
+</head>
+<body ng-controller="DefaultController">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <p>Counter: {{counter}}</p>
+            <p>
+                <button class="btn btn-primary" ng-click="incrementCounter()">Increment</button>
+            </p>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th><th>Category</th><th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="product in products">
+                        <td>{{product.name}}</td>
+                        <td>{{product.category | labelCase:true}}</td>
+                        <td>{{product.price | currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-body">
+            <p>Interval is updated every 5 seconds, for 10 times. Timeout Counter is updated once after 5 seconds</p>
+            <p>Interval Counter: {{intervalCounter}}</p>
+            <p>Timeout Counter: {{timerCounter}}</p>
+        </div>
+    </div>
+</body>
+</html>

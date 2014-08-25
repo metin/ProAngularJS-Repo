@@ -1460,7 +1460,144 @@ The methods defined for the $injector service are:
 
 There is rarely a need to work directly with this service.
 
-## UNIT
+# Unit Testing
+
+Unit Testing is the technique of isolating a single small piece of functionality and testing it independently of the rest of the application and AngularJS.
+When carefully applie, unit testing can reduce the number of software defects that show up later in the development process, especially those that appear when the application is deployed.
+
+Unit testing works best with teams that have strong design skills and a good understanding of what and who the finished product is for, as this will prevent using as a measure of quality passing arbitrary unit tests that in no case reflect the inputs that actual users will perform.
+
+## Working with Karma and Jasmine
+
+When writing tests, you should use the pattern called arrange/act/assert:
+    . Arrange: set up the scenario required for the test
+    . Act : perform the test
+    . Assert : verify that the actual result matches the expected results
+
+The most common Jasmine functions are:
+    . describe   : Groups a number of related tests
+    . beforeEach : Executes a function before each test, for the arrange part.
+    . it         : Executes a function to form a test, for the act part
+    . expect     : Identifies the result from the test, for the assertion
+
+There are a lot of to*() functions for evaluating test results:
+    . expect(x).toEqual(val)       : compares the result from the test to the expected value
+    . expect(x).toBe(obj)          : asserts that x and obj are the same object
+    . expect(x).toMatch(regex)     : asserts that x matches the specified regular expression
+    . expect(x).toBeDefined()      : asserts that x has been defined
+    . expect(x).toBeUndefined()    : asserts that x has not been defined
+    . expect(x).toBeNull()         : asserts that x is null
+    . expect(x).toBeTruthy()       : asserts that x is true or evaluates to true
+    . expect(x).toBeFalsy()        : asserts that x is false or evaluates to false
+    . expect(x).toContain(y)       : asserts that x is a string that contains y
+    . expect(x).toBeGreaterThan(y) : asserts that x is greater than y
+
+## Understanding the Mock Objects
+Mocking is the process of creating objects that replace the key components in an application to allow effective unit testing.
+The components that the target for testing depends on are replaced by mock objects, which implement the API of the components that are required but generate fabricated, predictable results. You can alter the behavior of the mock objects to create different scenarios in which to test your code, which makes it easy to arrange a wide range of tests without having to endlessly reconfigure test servers, database, networks, etc.
+
+### The ngMocks Module
+
+The ngMocks module contains a set of mock objects that are used to replace AngularJS components.
+
+The following Mock objects are contained in the ngMocks module:
+    . angular.mock : used to create mock modules and resolve dependencies
+    . $exceptionHandler : a mock implementation of the $exceptionHandler service that rethrows the exceptions it receives.
+    . $interval : a mock implementation of the $interval service that allows time to be moved forward to trigger scheduled functions on demand.
+    . $log : a mock implementation of the $log service that exposes the messages it receives through a set of properties, one for each of the methods defined by the real service.
+    . $timeout: a mock implementation of the $timeout service that allows the timer to be expired programmatically, so that the associated function can be executed on demand.
+
+The angular.mock object provides methods that load modules and allow dependencies to be resolved in unit tests. It provides the following methods:
+    . module(name) : loads the specified module
+    . inject(fn)   : resolves dependencies and injects them into a function.
+    . dump(object) : serializes an AngularJS object
+
+In addition to the ngMocks module, AngularJS provides also some other methods that are useful for unit testing:
+    . $rootScope.$new() : creates a new scope
+    . $controller(name) : creates an instance of the specified controller
+    . $filter(name)     : creates an instance of the specified filter
+
+## Testing a Controller
+To test a controller, you first of all load the module that contains the controller:
+
+    beforeEach(angular.mock.module('exampleApp.Controllers'));
+        or
+    beforeEach(module('exampleApp.Controllers'));
+
+as module() is defined globally.
+
+Then, you have to instantiate the controller and provide its dependencies:
+
+        beforeEach(angular.mock.inject(['$controller', '$rootScope', function($controller, $rootScope) {
+            mockScope = $rootScope.$new();
+            controller = $controller('DefaultController', {
+                $scope: mockScope
+            });
+        }]));
+
+After that, you can perform the actual unit tests:
+
+        it('creates variable', function() {
+            expect(mockScope.counter).toEqual(0);
+        });
+
+        it('increments counter', function() {
+            mockScope.incrementCounter();
+            expect(mockScope.counter).toEqual(1);
+        });
+
+## Mock Objects
+
+### Mocking HTTP Responses
+The $httpBackend service provides a low-level API that is used by $http service to make Ajax requests. The equivalent $httpBackend service included in ngMocks module makes it easy to consistently simulare responses from a server, which allows a unit of code to be isolated from real servers and networks.
+
+The methods defined by $httpBackend are:
+    . expect(method, url, data, headers) : defines an expectation for a request that matches the method and URL with optional data and header matches.
+    . flush() : sends back pending results.
+    . flush(count) : sends back the specified number of responses.
+    . resetExpectations() : resets the set of expectations
+    . verifyNoOutstandingExpectation() : checks that all of the expected requests have been received.
+    . respond(data) : defines a response for an expected request
+    . response(status, data, headers) : same as above
+
+
+** Note **
+To reflect the async nature of Ajax requests, the $httpBackend service won't send its canned responses until the flush() method is called. This allows you to test the effect of long delays or timeouts if necessary.
+
+Calling the flush() method resolves the promise returned by the $http service and executes the success function defined by the controller:
+
+### Mocking Periods of Time
+The $interval and $timeout mock services allow you to explicitly trigger the callback functions registered by the code being tested.
+
+|Service    |Method                  |Description                                                 |
+|-----------|------------------------|----------------------------------------------------------- |
+| $timeout  | flush(millis)          | Advances the timer by the specified number of milliseconds |
+| $timeout  | verifyNoPendingTasks() | Checks whether there are callbacks yet to be invoked       |
+| $interval | flush(millis)          | Advances the timer by the specified number of milliseconds |
+---------------------------------------------------------------------------------------------------
+
+### Mocking Logging
+The mock $log service keeps track of the log messages it receives and presents them through a logs property that is added to the real service method names: log.logs, debug.logs, warn.logs, etc.
+Using this properties let you check that a unit code is logging messages correctly.
+
+Additionally, the mock $log service provides the methods:
+    . assertEmpty() : throws an exception if any logging messages have been written
+    . reset() : clears the stored messages
+
+## Testing Filters
+You can obtain programmatically instances of a filter through the $filter service. This can be effectively used to unit test filters.
+
+## Testing Directives
+Testing directive is more complicated than testing controllers and filters because of the way that directives are applied to HTML and also because directives modify HTML.
+For this reason, unit testing for directives involve jqLite and the $compile service.
+
+See the example 121-. Note that in this example we cannot apply the directive to the result of the $http.get because $http.get returns a promise and not the actual data. because of that, when the directive is executed, $scope.products is always undefined. Thus, in the example an static array is defined.
+
+## Testing a Service
+Testing services is easy, as by definition are stand-alone components.
+
+# End-to-End Testing
+
 
 # Examples
 
@@ -1814,3 +1951,15 @@ Note that this project requires that backend-app is running on port 9000. See ba
 114-service-injector-get: Illustrates how to obtain and feed the dependencies into a function so that it can be called programmatically.
 
 115-service-injector-invoke: Illustrates how to use the $injector.invoke method to invoke a function programmatically passing the dependendencies and arguments.
+
+116-hello-unit-testing: Illustrates how to test a simple controller with Jasmine and Karma.
+
+117-unit-test-mock-http: Illustrates how to configure the $httpBackend mock object to mock $http requests.
+
+118-unit-test-mock-interval-timeout: Illustrates how to leverage $interval and $timeout mock objects to trigger the callback actions associated to $interval and $timeout.
+
+119-unit-test-mock-log: Illustrates how to use the $log mock object to check that the application is correctly logging messages.
+
+120-unit-test-filter: Illustrates how to unit test a filter.
+
+121-unit-test-directive: Illustreates how to unit test a directive. Note that in this example we cannot apply the directive to the result of the $http.get because $http.get returns a promise and not the actual data. because of that, when the directive is executed, $scope.products is always undefined. Thus, in the example an static array is defined.
