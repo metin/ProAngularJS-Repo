@@ -1396,8 +1396,24 @@ The names `add` and `remove` are used when the content is added and removed from
 
 In the example:
     .ngFade.ng-enter : the first part of the name ngFade is the named used to apply the animations or transitions such as in class="ngFade". The second part tells AngularJS what the CSS style is to be used for: ng-enter and ng-enter-active. The first one defines the start point and details of the transition. The second one defines the end-point for the transition.
-The name enter is used when the content is shown to the user.
-The name `leave`
+
+## Services for Touch Events
+The ngTouch module contains the $swipe service which is used to improve support for touchscreen devices. The events in ngTouch module provide notification of swipe gestures and a replacement for the ng-click directive.
+
+You can install the ngTouch module using:
+    `bower install angular-touch --save`
+
+    angular.module('exampleApp', ['exampleApp.Controllers', 'ngTouch']);
+
+    <script type="text/javascript" src="bower_components/angular-touch/angular-touch.js"></script>
+
+Once installed, you will be provided with events such as ng-click (improved for touch, ng-swipe-*, etc.)
+    <div class="well well-sm"
+        ng-swipe-right="handleSwipe('left-to-right')"
+        ng-swipe-left="handleSwipe('right-to-left')">
+        <h4>Swipe Here</h4>
+    </div>
+
 # Examples
 
 000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
@@ -1737,6 +1753,8 @@ Note that this project requires that backend-app is running on port 9000. See ba
 
 108-services-views-route-dependencies: Illustrates how to use the resolve configuration property on the route to specify a dependency. In this case, the dependency consists in the data received from the backend.
 
-109-animation-basics: Illustrates how to apply basic fade-in transition to the ng-view.
+109-animation-basics: Illustrates how to apply basic fade-in transition to the ng-view. The example requires the backend-app to be running, which you can do by typing `mvn spring-boot:run`.
 
-110-animation-caveats: Demonstrates that when working with animations you shouldn't mind the departure of old content, because during some time both views will be shown and that produces an unappealing effect.
+110-animation-caveats: Demonstrates that when working with animations you shouldn't mind the departure of old content, because during some time both views will be shown and that produces an unappealing effect. The example requires the backend-app to be running, which you can do by typing `mvn spring-boot:run`.
+
+111-touch-basics: Illustrates the basics of the ngTouch module. In particular, the example declares a handler for the swipe events.
