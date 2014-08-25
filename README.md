@@ -1278,6 +1278,45 @@ You can have conservative and eager parameters:
             });
 
 ### Accessing Routes and Routes Parameters
+The URLs configured for the mapping between physical and logical views can be accessed in code using the $route and $routeParams services.
+
+            $scope.$on('$routeChangeSuccess', function() {
+                if ($location.path().indexOf('/edit/') === 0) {
+                    var id = $routeParams['id'];
+            ...
+
+                }
+            });
+
+The $route service can be used to manage the currently selected route. It provides the following properties and methods:
+    . current: returns an object with info about the active route. This object defines a controller property that returns a controller associated with the route and a locals property that provides the set of controller dependencies. The collection returned by locals also contains $scope and $template properties that return the scope for the controller and the view content.
+
+    . reload(): reloads the view event when the URL path hasn't changed.
+
+    . routes: returns the collections of the routes defined through the $routeProvider.
+
+Additionally, the $route service defines the following events:
+    . $routeChangeStart : triggered before the route is changed
+    . $routeChangeSuccess : triggered after the route has changed
+    . $routeUpdate : triggered when the route is refreshed; this is tied with the reloadOnSearch configuration property.
+    . $routeChangeError : triggered if the route cannot be changed.
+
+Note that the new path after the route has changed is obtained using: $location.path().
+
+### Configuring Routes
+The following table lists the Route configuration options:
+    . controller : specifies the name of a controller to be associated with the view displayed by the route.
+    . controllerAs : specifies an alias to be used for the controller
+    . template : specifies the contentn of the view, either as a literal HTML string or as a function that returns the HTML associated with the tamplate.
+    . templateUrl : specifies the URL of the view file to display when the route matches. This can be specified as a string or as a function that returns a string.
+    . resolve : specifies a set of dependencies for the controller.
+    . redirectTo : specifies a path that the browser should be redirected when the route is matched. This can be expressed as a string or a function.
+    . reloadOnSearch : when true, the default value, the route will reload only when the values returned by the $location.search() and hash() methods change.
+    . caseInsensitiveMatch: when true, the default value, routes are matched without honoring the case.
+
+### Using Controllers with Routes
+If you have lots of views in an application, having them share a single controller becomes difficult to manage and test. The controller configuration option allows you to specify a controller that has been previously registered through the Module.controller method for the view.
+By using this option you will be separating the behavior that is unique to each view.
 
 
 # Examples
