@@ -1460,6 +1460,7 @@ The methods defined for the $injector service are:
 
 There is rarely a need to work directly with this service.
 
+## UNIT
 
 # Examples
 
@@ -1811,3 +1812,5 @@ Note that this project requires that backend-app is running on port 9000. See ba
 113-service-injector-function-dependencies: Illustrates how to use the $injector.annotate() to obtain the dependecies declared for a function.
 
 114-service-injector-get: Illustrates how to obtain and feed the dependencies into a function so that it can be called programmatically.
+
+115-service-injector-invoke: Illustrates how to use the $injector.invoke method to invoke a function programmatically passing the dependendencies and arguments.
