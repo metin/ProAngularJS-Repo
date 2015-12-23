@@ -1,0 +1,7 @@
+[
+  {"action": "Buy flowers", "done": false},
+  {"action": "Get shoes", "done": false},
+  {"action": "Collect tickets", "done": true},
+  {"action": "Call Joe", "done": false},
+  {"action": "Prepare lunch", "done": true}
+]
