@@ -1618,7 +1618,8 @@ The simplest project template (development only) for an AngularJS application.
 A static mock-up of the ToDo AngularJS application.
 
 
-001-todo-app: The ToDoApp version 1 that covers in a very lightweight way the following topics:
+##### 000-todo-app-v1
+The ToDoApp version 1 that covers in a very lightweight way the following topics:
     . modules
     . controllers
     . filters: custom and built-in
