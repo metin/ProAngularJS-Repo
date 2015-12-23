@@ -1,0 +1,53 @@
+<!doctype html>
+<html ng-app="todoApp">
+  <head>
+    <meta charset="utf-8">
+    <title>To Do List &mdash; 001-todo-app-v0</title>
+
+    <script src="/node_modules/angular/angular.js"></script>
+
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/styles1.css">
+
+    <link rel="icon" href="favicon.png" type="image/png">
+  </head>
+  <body>
+    <div class="page-header">
+      <h1>Sergio's To Do list</h1>
+    </div>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="type task description">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Add</button>
+      </span>
+    </div> <!-- input-group -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Done</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Buy Flowers</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Get Shoes</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Collect Tickets</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>Call Joe</td>
+          <td>No</td>
+        </tr>
+      </tbody>
+    </table>
+    <small>with <span class="glyphicon glyphicon-heart" id="redheart"></span> from sergiofgonzalez</small>
+  </body>
+</html>

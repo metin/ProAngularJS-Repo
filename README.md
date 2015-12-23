@@ -2,7 +2,9 @@
 
 > Examples and Concepts from ProAngularJS book, by Adam Freeman (Apress, 2014)
 
-This repository contains my take on the examples and exercises found in the book. The `master` branch contains the original implementation I did on 2014, and the `angular2016` branch contains revisions of the same examples but performed on 2016.
+This repository contains my take on the examples and exercises found in the book. The `master` branch contains the original implementation I did on 2014, and the `angular2016` branch contains revisions of the same examples done on 2016.
+
+Several things have changed since then, the library versions, the task runner version plugins and also the approach to some things such as the dependency management.
 
 # Concepts
 AngularJS delivers the kind of functionality that used to be available only to server-side developers, but entirely in the browser.
@@ -1601,9 +1603,20 @@ Testing services is easy, as by definition are stand-alone components.
 # End-to-End Testing
 
 
-# Examples
+## Examples
 
-000-hello-angular: Serves as a check that the template project is correctly working. It includes Angular and Bootstrap as bower components. The application displays a list of things to do.
+### Part 0 - Project Templates
+
+#### 000-simple-dev-debug
+The simplest project template (development only) for an AngularJS application.
+
+### Part 1 - Getting Ready
+
+#### Section 01 - Hello Angular
+
+##### 000-todo-app-v0
+A static mock-up of the ToDo AngularJS application.
+
 
 001-todo-app: The ToDoApp version 1 that covers in a very lightweight way the following topics:
     . modules
