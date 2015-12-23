@@ -1630,7 +1630,8 @@ The ToDoApp version 1 that covers in a very lightweight way the following topics
 ##### 002-todo-app-http-service
 Based on [000-todo-app-v1](000-todo-app-v1), this instance of the application retrieves the list of items from a JSON file using the `$http` service.
 
-003-todo-app-final: This is the final version of 001-todo-app in which there is no additions but the contents are refactored to create neater code.
+##### 003-todo-app-final
+This is the final version of the To Do app in which some parts of the view has been refactored using directives.
 
 004-bootstrap-grids: An example of different types of Bootstrap grids.
 
