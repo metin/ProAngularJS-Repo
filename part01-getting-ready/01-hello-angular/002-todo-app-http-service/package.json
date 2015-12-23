@@ -1,7 +1,7 @@
 {
-  "name": "001-todo-app-v1",
+  "name": "002-todo-app-http-service",
   "version": "0.0.0",
-  "description": "First version of the To Do list application",
+  "description": "ToDo list app retrieving data using HTTP",
   "engines": {
     "node": "4.2.2"
   },

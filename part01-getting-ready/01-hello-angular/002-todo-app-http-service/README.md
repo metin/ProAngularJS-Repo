@@ -1,15 +1,11 @@
-# 001-todo-app-v1
+# 002-todo-app-http-service
 
-> AngularJS ToDo app with inline model
+> AngularJS ToDo app with model retrieved via HTTP from a mock data directory
 
 ## Details
-An implementation of ToDo list app using AngularJS in which the model is hardcoded in the `app.js` file.
+An implementation of ToDo list app using AngularJS in which the model is retrievied using HTTP.
 
 The application features a simple MVC approach in which, the Angular app and the controller are defined in the `app.js` file.
 
-Several major Angular capabilities are demonstrated:
-+ controllers
-+ custom filters
-+ one-way and two-way binding between the model and the view
-+ built-in directives: `ng-hide`, `ng-class`, `ng-repeat`...
-+ form validation: an empty task cannot be added
+On top of what's done on 001-todo-app-v1 this application illustrates:
++ the `$http` service
