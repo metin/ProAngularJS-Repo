@@ -1,6 +1,8 @@
-# ProAngularJS
+# ProAngularJS (2016)
 
-Examples and Concepts from ProAngularJS book
+> Examples and Concepts from ProAngularJS book, by Adam Freeman (Apress, 2014)
+
+This repository contains my take on the examples and exercises found in the book. The `master` branch contains the original implementation I did on 2014, and the `angular2016` branch contains revisions of the same examples but performed on 2016.
 
 # Concepts
 AngularJS delivers the kind of functionality that used to be available only to server-side developers, but entirely in the browser.
