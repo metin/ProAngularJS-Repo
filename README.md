@@ -1640,7 +1640,8 @@ The backend for [004-todo-app-backend-integration](004-todo-app-backend-integrat
 
 #### Section 02 - HTML, CSS and JavaScript primer
 
-004-bootstrap-grids: An example of different types of Bootstrap grids.
+##### 001-bootstrap-primer
+Illustrates the basics when working with Bootstrap library, including panels, wells, buttons, forms, containers and the exceptional responsive grid system.
 
 005-javascript-angular-basics: An example of some of the Angular utility methods that complement JavaScript, such as angular.forEach, angular.extend, etc. All the functionality is embedded inside the app.run method.
 
