@@ -1617,8 +1617,7 @@ The simplest project template (development only) for an AngularJS application.
 ##### 000-todo-app-v0
 A static mock-up of the ToDo AngularJS application.
 
-
-##### 000-todo-app-v1
+##### 001-todo-app-v1
 The ToDoApp version 1 that covers in a very lightweight way the following topics:
     . modules
     . controllers
@@ -1632,6 +1631,14 @@ Based on [000-todo-app-v1](000-todo-app-v1), this instance of the application re
 
 ##### 003-todo-app-final
 This is the final version of the To Do app in which some parts of the view has been refactored using directives.
+
+##### 004-todo-app-backend-integration
+In this iteration, the mock data retrieval is substituted to a call to a real backend. Only the `GET` operations are supported.
+
+##### e01-todo-app-backend
+The backend for [004-todo-app-backend-integration](004-todo-app-backend-integration). See the README.md for requirements.
+
+#### Section 02 - HTML, CSS and JavaScript primer
 
 004-bootstrap-grids: An example of different types of Bootstrap grids.
 
