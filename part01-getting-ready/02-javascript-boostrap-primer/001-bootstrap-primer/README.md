@@ -11,3 +11,5 @@ Illustrates the basics of working with Bootstrap 3 CSS library including:
 + Forms
 + Containers
 + Grid system
+
+The application does not include JavaScript code.
