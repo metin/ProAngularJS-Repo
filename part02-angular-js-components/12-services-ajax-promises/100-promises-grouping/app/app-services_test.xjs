@@ -1,6 +1,0 @@
-/* global describe */
-
-describe('exampleApp.Services', function() {
-    'use strict';
-
-});

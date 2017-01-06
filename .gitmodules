@@ -1,3 +1,0 @@
-[submodule "part01-getting-ready/01-hello-angular/e01-todo-app-backend"]
-	path = part01-getting-ready/01-hello-angular/e01-todo-app-backend
-	url = https://github.com/sergiofgonzalez/todo-app-backend.git

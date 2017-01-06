@@ -1,8 +1,0 @@
-[
-    {"name": "Apples", "category": "Fruit", "price": 1.20, "expiry": "10"},
-    {"name": "Bananas", "category": "Fruit", "price": 2.42, "expiry": "10"},
-    {"name": "Pears", "category": "Fruit", "price": 2.02, "expiry": "10"},
-    {"name": "Tuna", "category": "Fish", "price": 20.45, "expiry": "10"},
-    {"name": "Salmon", "category": "Fish", "price": 17.93, "expiry": "10"},
-    {"name": "Trout", "category": "Fish", "price": 12.93, "expiry": "10"}
-]
