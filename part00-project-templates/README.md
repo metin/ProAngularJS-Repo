@@ -1,5 +1,5 @@
 # ProAngularJS (2017): Part 0 &mdash; Project Templates
-> Examples covering several AngularJS topics
+> Kickstart project templates for the examples
 
 ## 00-prj-template-node
 Project template for *Node.js* server projects.

@@ -8,6 +8,7 @@ The `angular2017` branch is another take at the same idea, but on 2017!.
 
 Several things have changed since then, the library versions, the task runner version plugins and also the approach to some things such as the dependency management.
 
-## A note about the structure of the examples
-Several folders have been created to group the examples:
-+ part00-project-templates &mdash; Project template for the examples
+## A note about the directory structure of the examples
+The examples are grouped into folders:
++ **part00-project-templates** &mdash; Project templates for the examples
++ **part01-getting-ready** &mdash; Examples covering several topics at once including AngularJS, Bootstrap 4, etc.
