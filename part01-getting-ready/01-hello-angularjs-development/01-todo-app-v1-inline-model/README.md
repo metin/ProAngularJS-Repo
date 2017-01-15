@@ -1,4 +1,4 @@
-# 01-todo-app-v1
+# 01-todo-app-v1-inline-model
 > To Do List app built with AngularJS: inline model 
 
 ## Description

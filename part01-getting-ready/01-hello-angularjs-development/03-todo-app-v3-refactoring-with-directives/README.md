@@ -1,11 +1,20 @@
-# 02-todo-app-v2-mock-data-http
-> To Do List app built with AngularJS: getting model data through http 
+# 03-todo-app-v3-refactoring-with-directives
+> To Do List app built with AngularJS: introducing directory
 
 ## Description
 
-In this version the static model in the `app.js` is changed for an HTTP call that retrieves the tasks from `/mock-data/todo.json`. In order to do that, we use `app.run` which tells AngularJS to execute it once the initial setup has been completed.
+In this version, we define a couple of additional modules `todoAppHeaderModule` and `todoAppTaskFormModule` and inside them we define a couple of AngularJS directives.
+Angular directives allow you to define *extensions* to the HTML language to modularize views and behavior. In this case, we define the directives:
++ `<tasks-header></tasks-header>` &mdash; The header with the user name and the remaining tasks.
++ `<new-task-form></new-task-form>` &mdash; The form that lets the user define new tasks.
 
-To retrieve the data from the `todo.json` file we use the `$http` service which returns a promise with the data.
+In this particular example it seems a little bit unnatural, and a little bit of an overkill, but it let us see how easy it is to fragment sections of a complicated view to simplify it.
+
+Note also that now, we have to make the main module `app.js` explicitly depend on the newly defined modules:
+```javascript
+  /* define todoApp module: deps with modules defining the directives are included */
+  var app = angular.module("todoApp", ["todoAppHeaderModule", "todoAppTaskFormModule"]);
+```
 
 ![To Do List Image](ui.png)
 

@@ -1,4 +1,4 @@
-# 00-todo-app-v0
+# 00-todo-app-v0-static-mockup
 > static mockup of ToDo app
 
 ## Description
