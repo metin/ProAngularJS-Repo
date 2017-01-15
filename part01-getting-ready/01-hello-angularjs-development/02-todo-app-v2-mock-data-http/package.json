@@ -1,7 +1,7 @@
 {
-  "name": "01-todo-app-v1",
+  "name": "02-todo-app-v2-mock-data-http",
   "version": "0.0.1",
-  "description": "The first version of ToDo App on AngularJS",
+  "description": "To Do List app getting data via Ajax",
   "engines": {
     "node": "6.9.2",
     "npm": "3.10.9"

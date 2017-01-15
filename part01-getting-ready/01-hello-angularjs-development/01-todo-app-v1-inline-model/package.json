@@ -1,5 +1,5 @@
 {
-  "name": "01-todo-app-v1",
+  "name": "01-todo-app-v1-inline-model",
   "version": "0.0.1",
   "description": "The first version of ToDo App on AngularJS",
   "engines": {

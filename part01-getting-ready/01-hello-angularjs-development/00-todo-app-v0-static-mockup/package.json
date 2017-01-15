@@ -1,0 +1,35 @@
+{
+  "name": "00-todo-app-v0-static-mockup",
+  "version": "0.0.1",
+  "description": "The first version of ToDo App on AngularJS",
+  "engines": {
+    "node": "6.9.2",
+    "npm": "3.10.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sergiofgonzalez/ProAngularJS-Repo.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Sergio F. Gonzalez",
+    "email": "sergio.f.gonzalez@gmail.com"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "3.12.2",
+    "http-server": "0.9.0"
+  },
+  "dependencies": {},
+  "scripts": {
+    "start": "node build/index.js",
+    "lint": "eslint public/js/",
+    "clean": "rm -rf build/",
+    "copy": "cp -r public/ build/",
+    "build": "npm run lint",
+    "prebuild": "npm run clean",
+    "postbuild": "npm run copy",
+    "serve": "./node_modules/.bin/http-server -p 5000 build/ -c-1",
+    "dev": "nodemon --ext html,css,js,json,yml,png --watch public/ --watch .eslintrc.yml --exec 'npm run build --silent && npm run serve --silent'"
+  }
+}
