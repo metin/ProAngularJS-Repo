@@ -49,7 +49,7 @@ The project structure is super simple:
 
 *NPM* is used for the build tool, so make run you run `npm install` before running any of the tasks.
 
-The following options are meaningful for this project available:
+The following options are meaningful for this project:
 + `npm run clean` &mdash; Clean the build directory, where the project is *compiled*.
 + `npm run lint` &mdash; Run the JS linter on the `public/js` directory files.
 + `npm run dev` &mdash; Build the artifacts from source/, deploys a debug version on `build/` and starts up a simple HTTP server to serve the `build directory`.
