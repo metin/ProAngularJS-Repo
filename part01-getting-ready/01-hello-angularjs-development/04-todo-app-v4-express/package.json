@@ -1,0 +1,41 @@
+{
+  "name": "04-todo-app-v4-express",
+  "version": "0.0.1",
+  "description": "To Do List app served by custom Express app",
+  "engines": {
+    "node": "6.9.2",
+    "npm": "3.10.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sergiofgonzalez/ProAngularJS-Repo.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Sergio F. Gonzalez",
+    "email": "sergio.f.gonzalez@gmail.com"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "3.12.2"
+  },
+  "dependencies": {
+    "express": "4.14.0",
+    "js-yaml": "3.7.0",
+    "log4js": "1.1.0",
+    "nconf": "0.8.4"    
+  },
+  "scripts": {
+    "start": "node build/index.js",
+    "lint:client": "eslint src/public/js/",
+    "lint:server": "eslint src/ --ignore-pattern src/public/js/",
+    "lint": "eslint src/",
+    "clean": "rm -rf build/",
+    "copy": "cp -r src/ build/",
+    "build": "npm run lint",
+    "prebuild": "npm run clean",
+    "postbuild": "npm run copy",
+    "serve": "node build/index.js",
+    "dev": "nodemon --ext html,css,js,json,yml,png --watch src/ --watch .eslintrc.yml --exec 'npm run build && npm run serve'"
+  }
+}

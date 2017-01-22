@@ -1,5 +1,5 @@
 # 03-todo-app-v3-refactoring-with-directives
-> To Do List app built with AngularJS: introducing directory
+> To Do List app built with AngularJS: using directives
 
 ## Description
 
@@ -28,6 +28,7 @@ The model is hardcoded in the `app.js` too.
 + one-way and two-way data binding between the model and the view
 + basic built-in directives: `ng-hide`, `ng-class`, `ng-repeat`, `ng-disabled`...
 + form validation: an empty task cannot be added
++ directives
 
 ### Project Structure
 
